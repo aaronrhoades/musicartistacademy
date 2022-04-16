@@ -1,5 +1,21 @@
+@import './app/shared/normalize.scss';
 @import './app/shared/vars.scss';
-
 body {
     font-family: 'Montserrat', Arial, sans-serif;
+}
+
+app-root {
+    min-height: 100%;
+}
+
+.container {
+    display: block;
+    margin: 0;    
+    padding: 20px;
+}
+
+@media only screen and (min-width: 768px) {
+    .container {
+        padding: 2rem 20vw;
+    }
 }

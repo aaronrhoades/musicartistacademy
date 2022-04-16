@@ -13,6 +13,7 @@ import { LessonComponent } from './courses-lessons/lesson/lesson.component';
 import { BlogComponent } from './blog/blog.component';
 import { PostComponent } from './blog/post/post.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { HomePageComponent } from './home-page/home-page.component';
     LessonComponent,
     BlogComponent,
     PostComponent,
-    HomePageComponent
+    HomePageComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,

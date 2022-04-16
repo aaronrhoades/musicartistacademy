@@ -1,0 +1,50 @@
+
+.bio-pic-container {
+    height: 180px;
+    width: 180px;
+    overflow: hidden;
+    border-radius: 25%;
+    transition: all 0.1s;
+    box-shadow: 0 0 40px -10px #000;
+}
+.bio-pic-container:hover {
+    border-radius: 2%;
+}
+.bio-pic {
+    height: auto;
+    width: 180px;
+}
+.bio-header {
+    display: flex;
+    align-items: center;
+}
+.bio-name-container {
+    margin: 0 3rem;
+}
+.bio-name {
+    margin: 0;
+    font-size: 4rem;
+}
+.bio-card {
+    margin: 8rem auto;
+    padding: 4rem 2rem;
+    border-top: 40px solid #1e2643;
+    box-shadow: 0 20px 40px -35px #000;
+}
+.bio-title {
+    font-weight: 400;
+    color: #aaa;
+    font-size: 2rem;
+    padding: 0;
+    margin: 0;
+}
+
+.brands {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.brand img {
+    max-height: 200px;
+    height: auto;
+}
