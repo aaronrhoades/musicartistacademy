@@ -1,15 +1,23 @@
-export class Subscriber {
-    email?: string;
+export class Contact {
+    email: string;
     firstName: string;
-    lastName: string;
-
+    lastName?: string;
+    address?: {
+        addressLine1: string;
+        addressLine2?: string;
+        city: string;
+        state: string;
+        zip: string;
+    }  
+    phone?: string;
+    
     constructor() {
+        this.email = '';
         this.firstName = '';
-        this.lastName = '';
     }
 }
 
-export class Login extends Subscriber {
+export class Login extends Contact {
     username?: string;
     password: string;
     
