@@ -1,3 +1,30 @@
 <div class="container">
-    <p>dashboard works!</p>
+    <h2>Pick up where you left off</h2>
+    <div class="d-flex">
+        <ng-container *ngFor="let lesson of recentLessons">
+            <div class="card">
+                <div class="card-feature">
+                    <img src="{{lesson.featureImageUrl}}" alt="{{lesson.title}}">
+                </div>
+                <div class="card-content">
+                    <h3>{{lesson.title}}</h3>
+                    <p>{{lesson.description}}</p>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+    <h2 class="center-text">My Courses</h2>
+    <div class="d-flex">
+        <ng-container *ngFor="let course of myCourses">
+            <div class="card">
+                <div class="card-feature">
+                    <img src="{{course.featureImageUrl}}" alt="{{course.title}}">
+                </div>
+                <div class="card-content">
+                    <h3>{{course.title}}</h3>
+                    <p>{{course.description}}</p>
+                </div>
+            </div>
+        </ng-container>
+    </div>
 </div>

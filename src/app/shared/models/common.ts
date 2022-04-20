@@ -1,16 +1,18 @@
 export class PostBase {
     id: string;
     title: string;
-    description: HTMLCollection;
-    body: HTMLCollection;
+    description: string;
+    body: string;
     postType: string;
+    featureImageUrl: string;
 
     constructor() {
         this.id = '';
         this.title = '';
-        this.description = new HTMLCollection();
-        this.body = new HTMLCollection();
+        this.description = '';
+        this.body = '';
         this.postType = '';
+        this.featureImageUrl = '';
     }    
 }
 
