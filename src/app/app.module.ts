@@ -14,6 +14,7 @@ import { BlogComponent } from './blog/blog.component';
 import { PostComponent } from './blog/post/post.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { AboutComponent } from './about/about.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AboutComponent } from './about/about.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
