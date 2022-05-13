@@ -1,3 +1,92 @@
 <div class="container">
-    <p>register works!</p>
-</div>
+    <h1>Create an Account</h1>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="login-form">
+        <div class="vert-space">
+
+            <h2>Login Credentials</h2>
+            <div class="form-control">
+                <label for="">
+                    Email
+                </label>
+                <input type="text" name="">
+            </div>
+            <div class="form-control">
+                <label for="">
+                    Password
+                </label>
+                <input type="password" name="">
+            </div>
+        </div>
+        <div class="vert-space">
+
+            <h2>Contact Info</h2>
+            
+            <div class="form-group form-horizontal">
+                <div class="form-control">
+                    <label for="firstName">
+                        First Name
+                    </label>
+                    <input type="text" name="firstName" formControlName="firstName">
+                    
+                </div>
+                
+                <div class="form-control">
+                    <label for="lastName">
+                        Last Name
+                    </label>
+                    <input type="text" name="lastName" formControlName="lastName">
+                </div>
+            </div>
+            <div class="form-control">
+                <label for="phone">
+                    Phone Number
+                </label>
+                <input type="text" name="phone" formControlName="phone">
+            </div>
+            
+            <div class="form-group vert-space" formGroupName="mailingAddress">
+                <h3>Mailing Address</h3>
+                <div class="form-control">
+                    <label for="addressLine1">
+                        Address Line 1
+                    </label>
+                    <input type="text" name="addressLine1" formControlName="addressLine1">
+                </div>
+                <div class="form-control">
+                    <label for="addressLine2">
+                        Address Line 2
+                    </label>
+                    <input type="text" name="addressLine2" formControlName="addressLine2">
+                </div>
+                <div class="form-group form-horizontal">
+                    
+                    <div class="form-control">
+                        <label for="city" class="address">
+                            City
+                        </label>
+                        <input type="text" name="city" formControlName="city">
+                    </div>
+                    <div class="form-control">
+                        <label for="addressLine1">
+                            State
+                        </label>
+                        <select formControlName="state">
+                            <option *ngFor="let state of states" [ngValue]="state">
+                                {{state}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-control">
+                        <label for="zip">
+                            Zip
+                        </label>
+                        <input type="text" name="zip" formControlName="zip">
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="d-flex flex-row justify-end">
+                <button type="submit" [disabled]="!registerForm.valid" class="btn">Submit</button>
+            </div>
+        </form>
+    </div>

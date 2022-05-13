@@ -1,3 +1,5 @@
-<div class="container">
-    <p>lesson works!</p>
+<div class="container" *ngIf="lesson$ | async let lesson">
+    <img [src]="lesson.featureImageUrl" alt="">
+    <h1>{{lesson.title}}</h1>
+    <p>{{lesson.description}}</p>
 </div>

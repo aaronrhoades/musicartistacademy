@@ -1,3 +1,10 @@
-<div class="container">
-    <p>course works!</p>
+<div class="container" *ngIf="course$ | async let course">
+    <img [src]="course.featureImageUrl" alt="">
+    <h1>{{course.title}}</h1>
+    <p>{{course.description}}</p>
+    <ng-template *ngFor="let id of course.lessonIds">
+        <div class="card">
+            
+        </div>
+    </ng-template>
 </div>

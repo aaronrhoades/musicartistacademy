@@ -1,0 +1,24 @@
+.d-flex {
+    display: flex;
+}
+.justify-start {
+    justify-content: flex-start;
+}
+.justify-even {
+    justify-content: space-evenly;
+}
+.justify-end {
+    justify-content: flex-end;
+}
+.justify-center {
+    justify-content: center;
+}
+.flex-row {
+    flex-direction: row;
+}
+.flex-column {
+    flex-direction: column;
+}
+.flex-wrap {
+    flex-wrap: wrap;
+}

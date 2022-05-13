@@ -1,3 +1,20 @@
-<div class="container">
-    <p>login works!</p>
+<div class="container login-container">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+        <h2>Login</h2>
+        <div class="form-control">
+            <label for="">
+                Email
+            </label>
+            <input type="text" name="">
+        </div>
+        <div class="form-control">
+            <label for="">
+                Password
+            </label>
+            <input type="password" name="">
+        </div>
+        <div class="d-flex justify-end">
+            <button type="submit" [disabled]="!loginForm.valid" class="btn">Login</button>
+        </div>
+    </form>
 </div>

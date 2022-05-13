@@ -1,30 +1,41 @@
 <div class="container">
-    <h2>Pick up where you left off</h2>
-    <div class="d-flex">
-        <ng-container *ngFor="let lesson of recentLessons">
-            <div class="card">
-                <div class="card-feature">
-                    <img src="{{lesson.featureImageUrl}}" alt="{{lesson.title}}">
+    <h1>Welcome</h1>
+    <div class="vert-space">
+        <h2>Pick up where you left off</h2>
+        <div class="d-grid" *ngIf="recentLessons$ | async let recentLessons">
+            <ng-container *ngFor="let lesson of recentLessons">
+                <div class="card">
+                    <div class="card-feature">
+                        <img src="{{lesson.featureImageUrl}}" alt="{{lesson.title}}">
+                    </div>
+                    <div class="card-content">
+                        <h3>{{lesson.title}}</h3>
+                        <p>{{lesson.description}}</p>
+                    </div>
+                    <div class="d-flex justify-center">
+                        <a class="btn" [routerLink]="['/lesson', lesson.id]">View Lesson</a>
+                    </div>
                 </div>
-                <div class="card-content">
-                    <h3>{{lesson.title}}</h3>
-                    <p>{{lesson.description}}</p>
-                </div>
-            </div>
-        </ng-container>
+            </ng-container>
+        </div>
     </div>
-    <h2 class="center-text">My Courses</h2>
-    <div class="d-flex">
-        <ng-container *ngFor="let course of myCourses">
-            <div class="card">
-                <div class="card-feature">
-                    <img src="{{course.featureImageUrl}}" alt="{{course.title}}">
+    <div class="vert-space">
+        <h2 class="center-text">My Courses</h2>
+        <div class="d-grid" *ngIf="myCourses$ | async let myCourses">
+            <ng-container *ngFor="let course of myCourses">
+                <div class="card">
+                    <div class="card-feature">
+                        <img src="{{course.featureImageUrl}}" alt="{{course.title}}">
+                    </div>
+                    <div class="card-content">
+                        <h3>{{course.title}}</h3>
+                        <p>{{course.description}}</p>
+                    </div>
+                    <div class="d-flex justify-center">
+                        <a [routerLink]="['/course', course.id]" class="btn">View Course</a>
+                    </div>
                 </div>
-                <div class="card-content">
-                    <h3>{{course.title}}</h3>
-                    <p>{{course.description}}</p>
-                </div>
-            </div>
-        </ng-container>
+            </ng-container>
+        </div>
     </div>
 </div>
