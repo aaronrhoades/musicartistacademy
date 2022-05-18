@@ -4,11 +4,27 @@
   "description": "API for Music Artist Academy interactions",
   "main": "app.js",
   "scripts": {
+    "start": "@powershell -Command $env:DEBUG='app';nodemon app.js",
+    "debug": "@powershell -Command $env:DEBUG='*';nodemon app.js",
+    "startMac": "DEBUG=app & nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Aaron Rhoades",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.1"
+    "chalk": "^4.1.2",
+    "debug": "^4.3.4",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.16",
+    "typescript": "^4.6.4"
+  },
+  "nodemonConfig": {
+    "restartable": "rs",
+    "delay": 2500,
+    "env": {
+      "port": "5000"
+    }
   }
 }

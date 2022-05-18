@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="my-5">
+
+            <h1>API Endpoint Documentation</h1>
+        </div>
+        <%  var endpoint = endpoints.filter(x => x.url === url)
+            endpoint.map((endpoint) => { %>
+            <div class="jumbotron">
+                <h2><%=endpoint.url%></h2>
+                <p class="lead"><%=endpoint.callType%></p>
+                <p><%=endpoint.description%></p>
+                <% for(let example of endpoint.examples) {%>
+                    <div style="margin-top: 2em">
+                        <code>
+                        <%=example%>
+                        </code>
+                    </div>
+                    <%}%>
+            </div>
+        <% }) %>
+            
+    </div>
+</body>
+</html>
