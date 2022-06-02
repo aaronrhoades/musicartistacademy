@@ -5,13 +5,13 @@
             <label for="">
                 Email
             </label>
-            <input type="text" name="">
+            <input type="text" formControlName="email">
         </div>
         <div class="form-control">
             <label for="">
                 Password
             </label>
-            <input type="password" name="">
+            <input type="password" formControlName="password">
         </div>
         <div class="d-flex justify-end">
             <button type="submit" [disabled]="!loginForm.valid" class="btn">Login</button>

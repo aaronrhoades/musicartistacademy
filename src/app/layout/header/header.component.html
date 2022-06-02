@@ -10,7 +10,12 @@
             <li><a routerLink="about">About</a></li>
             <li><a routerLink="dashboard">Courses</a></li>
             <li><a routerLink="blog">Blog</a></li>
-            <li><a routerLink="login">Login</a> | <a routerLink="sign-up">Sign Up</a></li>
+            <li *ngIf="isUserLoggedIn; else loginSignUp"><a (click)="logOut()" class="cursor-pointer">Log Out</a></li>
+            <ng-template #loginSignUp>
+                <div>
+                    <a routerLink="login">Login</a> | <a routerLink="sign-up">Sign Up</a>
+                </div>
+            </ng-template>
         </ul>
     </nav>
 </div>

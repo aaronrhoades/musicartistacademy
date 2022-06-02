@@ -45,3 +45,7 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Configuration
+/api/config/config.json
+/api/auth/keys/*

@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "windowsDebug": "cd api & @powershell -Command $env:DEBUG='app';nodemon api/app.js"
+    "windowsDebug": "cd api & @powershell -Command $env:DEBUG='app,app:*';nodemon api/app.js"
   },
   "private": true,
   "dependencies": {
@@ -19,6 +19,7 @@
     "@angular/platform-browser": "~13.1.0",
     "@angular/platform-browser-dynamic": "~13.1.0",
     "@angular/router": "~13.1.0",
+    "moment": "^2.29.3",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

@@ -5,16 +5,32 @@
 
             <h2>Login Credentials</h2>
             <div class="form-control">
-                <label for="">
+                <label for="email">
                     Email
                 </label>
-                <input type="text" name="">
+                <input type="text" id="email" formControlName="email" required>
+                <div class="input-error" *ngIf="email?.invalid && (email?.touched || email?.dirty)">
+                    <div *ngIf="email?.errors?.['required']">
+                        Email is required
+                    </div>
+                    <div *ngIf="email?.errors?.['email']">
+                        Please enter a valid email
+                    </div>               
+                </div>
             </div>
             <div class="form-control">
-                <label for="">
+                <label for="password">
                     Password
                 </label>
-                <input type="password" name="">
+                <input type="password" formControlName="password" required>
+                <div class="input-error" *ngIf="password?.invalid && (password?.touched || password?.dirty)">
+                    <div *ngIf="password?.errors?.['required']">
+                        Password is required
+                    </div>
+                    <div *ngIf="password?.errors?.['minlength']">
+                        Password must be at least {{passwordMinLength}} characters long
+                    </div>
+                </div>
             </div>
         </div>
         <div class="vert-space">
@@ -26,8 +42,12 @@
                     <label for="firstName">
                         First Name
                     </label>
-                    <input type="text" name="firstName" formControlName="firstName">
-                    
+                    <input type="text" name="firstName" formControlName="firstName" required>
+                    <div class="input-error" *ngIf="firstName?.invalid && (firstName?.touched || firstName?.dirty)">
+                        <div *ngIf="firstName?.errors?.['required']">
+                            First name is required
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="form-control">
@@ -85,8 +105,13 @@
                 </div>
             </div>
         </div>
-            <div class="d-flex flex-row justify-end">
-                <button type="submit" [disabled]="!registerForm.valid" class="btn">Submit</button>
-            </div>
+        <div class="alert alert-danger" role="alert" *ngIf="errors.length">
+            <ul>
+                <li *ngFor="let error of errors">{{error}}</li>
+            </ul>
+        </div>
+        <div class="d-flex flex-row justify-end">
+            <button type="submit" class="btn" (click)="showErrorsWhenInvalid()">{{user.id ? 'Save':'Submit'}}</button>
+        </div>
         </form>
     </div>

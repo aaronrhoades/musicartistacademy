@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Login } from 'src/app/shared/models/user/user';
-import { LoginService } from '../login.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,11 +12,11 @@ import { LoginService } from '../login.service';
 export class LoginComponent implements OnInit {
   public login: Login = new Login();
   public loginForm: FormGroup = new FormGroup({
-    emailUser: new FormControl(),
+    email: new FormControl(),
     password: new FormControl()
   });
 
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(private loginService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -25,8 +25,9 @@ export class LoginComponent implements OnInit {
     this.loginService.loginSubmit(this.loginForm.value as Login).subscribe(
       {
         next: (response) => {
-          if(response.success)
+          if(response.idToken) {
             this.router.navigate(['/dashboard']);
+          }
         },
         error: err => console.log(err)
       });
