@@ -67,11 +67,11 @@ exports.verifyUser = (req, res, next) => {
     User.findOne({email: email})
       .then(function(user) {
         if (!user) {
-          res.status(401).send('No user with the given username');
+          res.status(401).send('User not found. Please check to see if you have the correct email address');
         } else {
           // checking the passowords here
           if (!user.authenticate(password)) {
-            res.status(401).send('Wrong password');
+            res.status(401).send('Password is incorrect, please try again');
           } else {
             // if everything is good,
             // then attach to req.user

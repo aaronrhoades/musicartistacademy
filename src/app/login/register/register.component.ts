@@ -13,7 +13,7 @@ export class RegisterComponent implements OnInit {
   @Input() user: User = new User();
   passwordMinLength: number = 6;
   errors: string[] = [];
-  private changedSinceLastSubmit: boolean = true; //helps prevent multiple invalid calls to server
+  public changedSinceLastSubmit: boolean = true; //helps prevent multiple invalid calls to server
   public readonly states: string[] = StateAbbreviations;
   public registration: User = new User();
   public registerForm: FormGroup = this.fb.group({
