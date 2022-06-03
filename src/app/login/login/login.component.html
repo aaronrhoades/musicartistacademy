@@ -10,7 +10,7 @@
                 <div *ngIf="email?.errors?.['required']">
                     Email is required
                 </div>
-                <div *ngIf="email?.errors?.['email']">
+                <div *ngIf="email?.errors?.['email'] && !changedSinceLastSubmit">
                     Please enter a valid email
                 </div>
             </div>

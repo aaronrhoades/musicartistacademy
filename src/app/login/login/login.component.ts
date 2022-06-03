@@ -14,7 +14,10 @@ export class LoginComponent implements OnInit {
   errors: string[] = [];
   public changedSinceLastSubmit: boolean = false;
   public loginForm: FormGroup = this.fb.group({
-    email: new FormControl('',[Validators.required, Validators.email]),
+    email: new FormControl('',
+    {
+      validators:[Validators.required, Validators.email]
+    }),
     password: new FormControl('',[Validators.required])
   });
 
@@ -35,7 +38,6 @@ export class LoginComponent implements OnInit {
   }
   loginSubmit() {
     if(this.loginForm.valid && this.changedSinceLastSubmit) {
-      this.changedSinceLastSubmit = false;
       this.loginService.loginSubmit(this.loginForm.value as Login)
         .subscribe({
           next: (response) => {
@@ -47,6 +49,8 @@ export class LoginComponent implements OnInit {
             this.errors = [err.error];
           }
         });
+    } else {
+      this.changedSinceLastSubmit = false;
     }
   }
 }
