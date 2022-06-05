@@ -3,7 +3,7 @@ export class PostBase {
     title: string;
     description: string;
     body: string;
-    postType: string;
+    postType?: string;
     featureImageUrl: string;
 
     constructor() {

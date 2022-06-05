@@ -1,28 +1,27 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Course, Lesson } from '../shared/models/course/course';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CourseLessonService {
+  environment = environment;
   mockCourses: Course[] = [{
-    id: 'abcdefg',
+    _id: 'abcdefg',
     title: 'How to Stop Being Weird',
-    lessonIds: ['test', 'test123'],
     body: '',
     description: 'A course in how to not be so f*cking weird.',
-    featureImageUrl: 'https://www.aaronrhoades.com/wp-content/uploads/2016/12/P1440007-768x512.jpg',
-    postType: 'course'    
+    featureImageUrl: 'https://www.aaronrhoades.com/wp-content/uploads/2016/12/P1440007-768x512.jpg'
   },
   {
-    id: 'xyzxyz',
+    _id: 'xyzxyz',
     title: 'How to Make Good Music',
-    lessonIds: ['test', 'test123'],
     body: '',
     description: 'A course in how to make good music.',
-    featureImageUrl: 'https://www.aaronrhoades.com/wp-content/uploads/2016/12/P1440007-768x512.jpg',
-    postType: 'course'    
+    featureImageUrl: 'https://www.aaronrhoades.com/wp-content/uploads/2016/12/P1440007-768x512.jpg'
   }];
 
   mockLessons = [{
@@ -54,11 +53,10 @@ export class CourseLessonService {
   }];
 
   mockRecentLessons = { courseId: 'abcdefg', lessonId: 'test123' };
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  public courseById$(id: string): Observable<Course> {
-    let course: Course = this.mockCourses.find(x => id === x.id) || new Course();
-    return of(course);
+  public courseById$(id: string): Observable<any> {
+    return this.http.get(environment.api + "/courses/" + id)
   }
 
   public lessonById$(id: string): Observable<Lesson> {
@@ -66,8 +64,8 @@ export class CourseLessonService {
     return of(lesson);
   }
 
-  public userOwnedCourses$(): Observable<Course[]> {
-    return of(this.mockCourses);
+  public userOwnedCourses$(): Observable<any> {
+    return this.http.get(environment.api + "/courses/");
   } 
 
   public recentLessons$(): Observable<Lesson[]> {

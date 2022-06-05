@@ -5,6 +5,7 @@ const path = require('path');
 const config = require('./config/config.json');
 const port = config.server.port;
 const userRouter = require('./src/users/userRouter');
+const courseRouter = require('./src/courses/courseRouter');
 const auth = require('./auth/auth');
 
 require('mongoose').connect(config.db.url, {dbName: config.db.name});
@@ -18,6 +19,7 @@ app.use(express.json());
 
 app.use('/users', userRouter);
 
+app.use('/courses', courseRouter);
 
 // For static files in the /public/ folder
 app.use(express.static(path.join(__dirname, '/public/')));

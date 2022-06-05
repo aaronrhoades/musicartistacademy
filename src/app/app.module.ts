@@ -17,6 +17,9 @@ import { AboutComponent } from './about/about.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './login/auth.interceptor';
+import { PageNotFoundComponent } from './system/page-not-found/page-not-found.component';
+import { UnauthorizedComponent } from './system/unauthorized/unauthorized.component';
+import { AdminModule } from './admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -31,10 +34,13 @@ import { AuthInterceptor } from './login/auth.interceptor';
     BlogComponent,
     PostComponent,
     HomePageComponent,
-    AboutComponent
+    AboutComponent,
+    PageNotFoundComponent,
+    UnauthorizedComponent
   ],
   imports: [
     BrowserModule,
+    AdminModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule

@@ -8,6 +8,7 @@ import { LessonComponent } from './courses-lessons/lesson/lesson.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { LoginComponent } from './login/login/login.component';
 import { RegisterComponent } from './login/register/register.component';
+import { PageNotFoundComponent } from './system/page-not-found/page-not-found.component';
 
 const routes: Routes = [ 
   { path: '', component: HomePageComponent },
@@ -18,7 +19,8 @@ const routes: Routes = [
   { path: 'course/:id', component: CourseComponent },
   { path: 'lesson/:lessonId', component: LessonComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'lesson', component: LessonComponent }
+  { path: 'lesson', component: LessonComponent },
+  { path: '**', component: PageNotFoundComponent}
 ];
 
 @NgModule({

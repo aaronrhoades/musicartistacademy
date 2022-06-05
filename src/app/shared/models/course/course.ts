@@ -1,13 +1,12 @@
 import { BasicComment, PostBase } from "../common";
 
-export class Course extends PostBase {
-    lessonIds: string[];
-    leadTeacherId?: string;
-    videoUrl?: string;
+export class Course {
+    _id: string = '';
+    title: string = '';
+    body: string = '';
+    description: string = '';
+    featureImageUrl?: string;
     constructor() {
-        super();
-        this.lessonIds = [];
-        this.postType = 'course';
     }
 }
 
