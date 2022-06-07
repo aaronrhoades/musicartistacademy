@@ -64,7 +64,11 @@ export class CourseLessonService {
     return of(lesson);
   }
 
-  public userOwnedCourses$(): Observable<any> {
+  public coursesByUserId$(): Observable<any> {
+    return this.http.get(environment.api + "/courses/");
+  } 
+
+  public coursesByTeacherId$(): Observable<any> {
     return this.http.get(environment.api + "/courses/");
   } 
 

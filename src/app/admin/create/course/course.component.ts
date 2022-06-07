@@ -33,16 +33,17 @@ export class CreateCourseComponent implements OnInit {
 
   ngOnInit(): void {
     const classId = this.route.snapshot.paramMap.get('id');
-    if (classId)
+    if (classId && classId != null) {
       this.isNewCourse = false;
       this.courseService.courseById$(String(classId)).pipe(
         tap(x => console.log(x))
-      ).subscribe({
-        next: res => {
-          let course = res as Course;
-          this.form.patchValue(course);
-        }
-      });
+        ).subscribe({
+          next: res => {
+            let course = res as Course;
+            this.form.patchValue(course);
+          }
+        });
+    }
   }
   saveCourse() {
     if (!this.isNewCourse){

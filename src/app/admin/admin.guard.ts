@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { AuthService, PermissionLevels } from '../login/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminGuard implements CanActivate, CanActivateChild {
+  constructor(private authService: AuthService, private router: Router){}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
@@ -14,8 +16,17 @@ export class AdminGuard implements CanActivate, CanActivateChild {
   canActivateChild(
     childRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      console.log("EN GUARD");
-    return true;
+      let urlTree = this.router.parseUrl('unauthorized');
+      let token = this.authService.getCurrentUserTokenClient();
+      if (!token?.permissionLevel){
+        return of(urlTree);
+      }
+
+      let permissionArray = (token.permissionLevel as Array<string>);
+      if (permissionArray.includes(PermissionLevels.Teacher) || permissionArray.includes(PermissionLevels.System))
+        return true;
+      else { 
+        return of(urlTree)
+      }
   }
-  
 }

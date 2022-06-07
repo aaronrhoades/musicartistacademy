@@ -3,4 +3,10 @@
     <ul>
         <li><a routerLink="courses/new">Create a New Course</a></li>
     </ul>
+    <h2>My Courses</h2>
+    <ul>
+        <li *ngFor="let course of myCourses$ | async; index as i">
+            <a [routerLink]="['courses/',course._id]">{{course.title}}</a>
+        </li>
+    </ul>
 </div>

@@ -10,6 +10,12 @@ interface AuthResponse {
   expiresIn: number
 }
 
+export enum PermissionLevels {
+  System ='system',
+  Teacher = 'teacher',
+  Student = 'student',
+  Free = 'free'
+}
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +25,16 @@ export class AuthService {
   isUserLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject(this.isLoggedIn());
   constructor(private http: HttpClient) { }
 
+  // Authorization
+  getCurrentUserTokenClient() {
+    let tokenPayload = localStorage.getItem('id_token')?.split('.')[1];
+    if (tokenPayload) {
+      let decodedPayload = window.atob(tokenPayload);
+      return JSON.parse(decodedPayload);
+    }
+  }
+
+  // Authentication
   loginSubmit(login: Login) : Observable<AuthResponse> {
     return this.http.post<AuthResponse>(this.environment.api + '/users/login', login).pipe(
       tap(res => { this.setSession(res) }),
