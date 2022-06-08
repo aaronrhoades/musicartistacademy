@@ -49,7 +49,7 @@ exports.put = (req, res, next) => {
 
 exports.login = (req, res) => {
   var user = req.user;
-  var token = signToken(user._id);
+  var token = signToken(user._id, user.permissionLevel);
   res.json({idToken: token, expiresIn: config.jwt.expireTime});
 }
 
@@ -60,7 +60,7 @@ exports.post = (req, res, next) => {
   newUser.save((err, user) => {
     if(err) {next(err);}
     if(user) {
-      var token = signToken(user._id);
+      var token = signToken(user._id, user.permissionLevel);
       res.json({idToken: token, expiresIn: config.jwt.expireTime});
     } else {
       res.status(500).send('Could not create user. A user may already exist with that email, or there was an unknown error on the server.');

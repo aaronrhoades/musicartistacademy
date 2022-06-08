@@ -1,0 +1,17 @@
+{
+    "db":{
+        "url": "mongodb+srv://your-server-url",
+        "name": "DEVDBNAMEHERE"
+    },
+    "server": {
+        "port": "5000",
+        "secret": "secret-here",
+        "allowedOrigins" : [ 
+            "http://localhost:4200",
+            "https://localhost:4200"
+        ]
+    },
+    "jwt": {
+        "expireTime": 3000
+    }
+}

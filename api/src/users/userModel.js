@@ -21,7 +21,16 @@ var UserSchema = new Schema({
       state: String,
       zip: String,
   },
-  phone: String
+  phone: String,
+  permissionLevel: {
+    type: Array,
+    default: ["free"],
+    required: true
+  },
+  createdAt: {
+    type: Date,
+    default: new Date()
+  }
 });
 
 UserSchema.pre('save', function(next) {
@@ -29,7 +38,6 @@ UserSchema.pre('save', function(next) {
   this.password = this.encryptPassword(this.password);
   next();
 })
-
 
 UserSchema.methods = {
   // check the passwords on signin
