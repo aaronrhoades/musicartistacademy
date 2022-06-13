@@ -23,6 +23,7 @@ export enum PermissionLevels {
 export class AuthService {
   environment = environment;
   isUserLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject(this.isLoggedIn());
+  public errors: BehaviorSubject<Array<string>> = new BehaviorSubject(new Array<string>());
   constructor(private http: HttpClient) { }
 
   // Authorization

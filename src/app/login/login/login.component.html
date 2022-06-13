@@ -1,4 +1,4 @@
-<div class="container login-container">
+<div class="container login-container" [ngClass]="{'container login-container':(container===true)}">
     <form [formGroup]="loginForm" (ngSubmit)="loginSubmit()" class="login-form">
         <h2>Login</h2>
         <div class="form-control">
@@ -26,11 +26,7 @@
                 </div>
             </div>
         </div>
-        <div class="alert alert-danger" role="alert" *ngIf="errors.length">
-            <div *ngFor="let error of errors">
-                {{error}}
-            </div>
-        </div>
+        <app-error-alert [errors]="errors"></app-error-alert>
         <div class="d-flex justify-end">
             <button type="submit" [disabled]="!changedSinceLastSubmit" class="btn" (click)="showErrorsWhenInvalid()">Login</button>
         </div>

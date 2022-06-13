@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import { tap } from 'rxjs';
 import { CourseLessonService } from 'src/app/courses-lessons/course-lesson.service';
+import { AuthService } from 'src/app/login/auth.service';
 import { Course } from 'src/app/shared/models/course/course';
 import { AdminService } from '../../admin.service';
 
@@ -13,6 +14,7 @@ import { AdminService } from '../../admin.service';
 })
 export class CreateCourseComponent implements OnInit {
   isNewCourse: boolean = true;
+  errors: string[] = [];
 
   form: FormGroup = this.fb.group({
     _id: this.fb.control(''),
@@ -28,7 +30,9 @@ export class CreateCourseComponent implements OnInit {
     private fb: FormBuilder,
     private courseService: CourseLessonService,
     private adminService: AdminService,
-    private route: ActivatedRoute
+    private authService: AuthService,
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -46,13 +50,31 @@ export class CreateCourseComponent implements OnInit {
     }
   }
   saveCourse() {
+    this.errors = [];
     if (!this.isNewCourse){
       this.updateCourse(this._id.value)
       return;
     }
-    this.adminService.saveCourse$(this.form.value as Course).subscribe({
-      next: res => {console.log('success', res)},
-      error: err => {console.log(err)},
+
+    let formValue = this.form.value as Course;
+    delete formValue._id; //to avoid errors in BE;
+    console.log(this.form.value);
+
+    this.adminService.saveCourse$(formValue).subscribe({
+      next: res => {
+        // if (res.body?.){}
+        if(res === null){
+          this.errors.push('Error communicating with the server, please try again.');
+        }        
+        console.log('success', res)
+      },
+      error: err => {
+        if(err.status === 401) {
+          this.authService.logout();
+          this.authService.errors.next(['Sorry, your session has expired. Please log in again.']);
+          this.router.navigate(['login']);
+        }
+      },
       complete: () => console.log('all set')
       
     });

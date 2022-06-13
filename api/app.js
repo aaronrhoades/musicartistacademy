@@ -11,15 +11,18 @@ const auth = require('./auth/auth');
 require('mongoose').connect(config.db.url, {dbName: config.db.name});
 // CORS
 const corsOptions = {
-    origin: config.server.allowedOrigins,
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-  }
+  origin: config.server.allowedOrigins,
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
 app.use(cors(corsOptions));
+app.use('/resources', express.static(__dirname +  '/resources'));
+
 app.use(express.json());
-
 app.use('/users', userRouter);
-
 app.use('/courses', courseRouter);
+
+
 
 // For static files in the /public/ folder
 app.use(express.static(path.join(__dirname, '/public/')));

@@ -1,3 +1,11 @@
 <div class="container">
-    <p>home-page works!</p>
+    <div class="d-flex flex-row">    
+        <div class="flex-2">
+            <h1>Welcome to Music Artist Academy</h1>
+            <p>home-page works!</p>
+        </div>
+        <div class="flex-1 card p4" *ngIf="!isLoggedIn">
+            <app-login [container]="false"></app-login>
+        </div>
+    </div>
 </div>

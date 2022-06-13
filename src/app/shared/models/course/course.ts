@@ -1,7 +1,7 @@
 import { BasicComment, PostBase } from "../common";
 
 export class Course {
-    _id: string = '';
+    _id?: string;
     title: string = '';
     body: string = '';
     description: string = '';

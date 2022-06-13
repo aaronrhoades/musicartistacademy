@@ -28,6 +28,9 @@
             <label for="body">Body</label>
             <textarea formControlName="body" id="body" rows="10"></textarea>
         </div>
-        <button type="submit" class="btn">Submit</button>
+        <app-error-alert [errors]="errors"></app-error-alert>
+        <div class="d-flex flex-row justify-end">
+            <button type="submit" class="btn">Save</button>
+        </div>
     </form>
 </div>

@@ -20,6 +20,7 @@ import { AuthInterceptor } from './login/auth.interceptor';
 import { PageNotFoundComponent } from './system/page-not-found/page-not-found.component';
 import { UnauthorizedComponent } from './system/unauthorized/unauthorized.component';
 import { AdminModule } from './admin/admin.module';
+import { ErrorAlertModule } from './shared/error-alert/error-alert.module';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { AdminModule } from './admin/admin.module';
     AdminModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ErrorAlertModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
