@@ -6,8 +6,8 @@ import { CourseComponent } from './courses-lessons/course/course.component';
 import { DashboardComponent } from './courses-lessons/dashboard/dashboard.component';
 import { LessonComponent } from './courses-lessons/lesson/lesson.component';
 import { HomePageComponent } from './home-page/home-page.component';
-import { LoginComponent } from './login/login/login.component';
-import { RegisterComponent } from './login/register/register.component';
+import { LoginComponent } from './user/login/login.component';
+import { RegisterComponent } from './user/register/register.component';
 import { PageNotFoundComponent } from './system/page-not-found/page-not-found.component';
 import { UnauthorizedComponent } from './system/unauthorized/unauthorized.component';
 

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, tap } from 'rxjs';
-import { AuthService } from 'src/app/login/auth.service';
+import { AuthService } from 'src/app/user/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -13,11 +12,11 @@ export class HeaderComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    this.authService.isUserLoggedIn.pipe(
-        tap(val => {
-          this.isUserLoggedIn = val;
-        })
-    ).subscribe();
+    this.authService.isUserLoggedIn.subscribe({
+      next: res => {
+        this.isUserLoggedIn = res;
+      }
+    });
   }
 
   logOut(){

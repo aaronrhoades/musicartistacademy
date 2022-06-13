@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthInterceptor } from 'src/app/login/auth.interceptor';
+import { AuthInterceptor } from 'src/app/user/auth.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CreateCourseComponent } from './create/course/course.component';
 import { AdminDashboardComponent } from './dashboard/dashboard.component';

@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import { tap } from 'rxjs';
 import { CourseLessonService } from 'src/app/courses-lessons/course-lesson.service';
-import { AuthService } from 'src/app/login/auth.service';
+import { AuthService } from 'src/app/user/auth.service';
 import { Course } from 'src/app/shared/models/course/course';
 import { ToastService } from 'src/app/shared/toast/toast.service';
 import { AdminService } from '../../admin.service';
