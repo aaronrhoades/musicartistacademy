@@ -21,6 +21,7 @@ import { PageNotFoundComponent } from './system/page-not-found/page-not-found.co
 import { UnauthorizedComponent } from './system/unauthorized/unauthorized.component';
 import { AdminModule } from './admin/admin.module';
 import { ErrorAlertModule } from './shared/error-alert/error-alert.module';
+import { ToastModule } from './shared/toast/toast.module';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { ErrorAlertModule } from './shared/error-alert/error-alert.module';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ErrorAlertModule
+    ErrorAlertModule,
+    ToastModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]

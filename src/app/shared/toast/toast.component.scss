@@ -1,0 +1,31 @@
+.toast-container {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+}
+
+.toast {
+    margin: 1rem;
+    padding: 2rem;
+    background: #4ced5f;
+    animation: toast 5s;
+    animation-fill-mode: forwards;
+}
+@keyframes toast {
+    0% {
+        display: block;
+        opacity: 1;
+    }
+    70% {
+        display: block;
+        opacity: 1;
+    }
+    99% {
+        display: block;
+        opacity: 0;
+    }
+    100%{
+        display: none;
+        opacity: 0;
+    }
+}

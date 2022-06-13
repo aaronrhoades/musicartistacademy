@@ -5,6 +5,7 @@ import { tap } from 'rxjs';
 import { CourseLessonService } from 'src/app/courses-lessons/course-lesson.service';
 import { AuthService } from 'src/app/login/auth.service';
 import { Course } from 'src/app/shared/models/course/course';
+import { ToastService } from 'src/app/shared/toast/toast.service';
 import { AdminService } from '../../admin.service';
 
 @Component({
@@ -32,7 +33,8 @@ export class CreateCourseComponent implements OnInit {
     private adminService: AdminService,
     private authService: AuthService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private toastService: ToastService
   ) { }
 
   ngOnInit(): void {
@@ -51,6 +53,10 @@ export class CreateCourseComponent implements OnInit {
   }
   saveCourse() {
     this.errors = [];
+    if(!this.form.valid){
+      this.errors.push('Form is invalid. Please check fields.');
+      return;
+    }
     if (!this.isNewCourse){
       this.updateCourse(this._id.value)
       return;
@@ -66,7 +72,10 @@ export class CreateCourseComponent implements OnInit {
         if(res === null){
           this.errors.push('Error communicating with the server, please try again.');
         }        
-        console.log('success', res)
+        else if (res._id) {
+          this.toastService.newToast('Course created successfully');
+          this.router.navigate(['admin/courses', res._id]);
+        }
       },
       error: err => {
         if(err.status === 401) {
@@ -82,7 +91,10 @@ export class CreateCourseComponent implements OnInit {
   updateCourse(_id: string) {
     this.adminService.updateCourse$(_id, this.form.value as Course).subscribe(
       {
-        next: res => { console.log(res) },
+        next: res => {
+          if(res._id)
+            this.toastService.newToast('Changes saved successfully');
+        },
         error: err => { console.log(err) }
     });
   }

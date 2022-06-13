@@ -7,6 +7,7 @@ import { AdminDashboardComponent } from './dashboard/dashboard.component';
 import { AdminRoutingModule } from './admin-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ErrorAlertModule } from '../shared/error-alert/error-alert.module';
+import { ToastModule } from '../shared/toast/toast.module';
 
 
 
@@ -19,7 +20,8 @@ import { ErrorAlertModule } from '../shared/error-alert/error-alert.module';
     CommonModule,
     AdminRoutingModule,
     ReactiveFormsModule,
-    ErrorAlertModule
+    ErrorAlertModule,
+    ToastModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}]
 })
