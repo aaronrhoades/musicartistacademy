@@ -12,6 +12,11 @@
         <div class="form-control">
             <label for="title">Title</label>
             <input type="text" formControlName="title" id="title">
+            <div class="input-error">
+                <div *ngIf="title?.errors?.['required']">
+                    Title is required
+                </div>
+            </div>
         </div>
         <!-- Feature Image URL -->
         <div class="form-control">

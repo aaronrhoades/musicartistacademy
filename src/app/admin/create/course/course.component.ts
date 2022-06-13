@@ -26,6 +26,7 @@ export class CreateCourseComponent implements OnInit {
   });
 
   get _id() { return this.form.get('_id') as FormControl }
+  get title() { return this.form.get('title') as FormControl}
 
   constructor(
     private fb: FormBuilder,
