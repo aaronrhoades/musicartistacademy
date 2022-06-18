@@ -1,0 +1,16 @@
+nav.sidebar {
+    padding: 2rem;
+    background: #eeeeee;
+}
+
+li.menu-item {list-style: none;}
+
+ul.menu {
+    padding: 0;
+}
+
+@media screen and (max-width: 760px) {
+    m-flex-col {
+        flex-direction: column;
+    }
+}

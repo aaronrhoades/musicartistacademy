@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, map, Observable, shareReplay, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import * as moment from 'moment';
+import { Router } from '@angular/router';
 
 interface AuthResponse {
   idToken: string,
@@ -24,7 +25,9 @@ export class AuthService {
   environment = environment;
   isUserLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject(this.isLoggedIn());
   public errors: BehaviorSubject<Array<string>> = new BehaviorSubject(new Array<string>());
-  constructor(private http: HttpClient) { }
+  public nextPage: BehaviorSubject<Array<string>> = new BehaviorSubject(['dashboard']);
+
+  constructor(private http: HttpClient, private router: Router) { }
 
   // Authorization
   getCurrentUserTokenClient() {

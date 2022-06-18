@@ -22,6 +22,9 @@ import { UnauthorizedComponent } from './system/unauthorized/unauthorized.compon
 import { AdminModule } from './admin/admin.module';
 import { ErrorAlertModule } from './shared/error-alert/error-alert.module';
 import { ToastModule } from './shared/toast/toast.module';
+import { UserAccountComponent } from './user/account/user-account.component';
+import { UserSettingsComponent } from './user/account/settings/user-settings.component';
+import { UserBillingComponent } from './user/account/billing/user-billing.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,10 @@ import { ToastModule } from './shared/toast/toast.module';
     HomePageComponent,
     AboutComponent,
     PageNotFoundComponent,
-    UnauthorizedComponent
+    UnauthorizedComponent,
+    UserAccountComponent,
+    UserSettingsComponent,
+    UserBillingComponent
   ],
   imports: [
     BrowserModule,

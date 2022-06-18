@@ -10,6 +10,10 @@ import { LoginComponent } from './user/login/login.component';
 import { RegisterComponent } from './user/register/register.component';
 import { PageNotFoundComponent } from './system/page-not-found/page-not-found.component';
 import { UnauthorizedComponent } from './system/unauthorized/unauthorized.component';
+import { UserSettingsComponent } from './user/account/settings/user-settings.component';
+import { UserBillingComponent } from './user/account/billing/user-billing.component';
+import { UserAccountComponent } from './user/account/user-account.component';
+import { UserGuard } from './user/user.guard';
 
 const routes: Routes = [ 
   { path: '', component: HomePageComponent },
@@ -17,12 +21,13 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'sign-up', component: RegisterComponent },
   { path: 'blog', component: BlogComponent },
-  { path: 'course/:id', component: CourseComponent },
-  { path: 'lesson/:lessonId', component: LessonComponent },
-  { path: 'dashboard', component: DashboardComponent },
+  { path: 'course/:id', component: CourseComponent, canActivate: [UserGuard]  },
+  { path: 'lesson/:lessonId', component: LessonComponent, canActivate: [UserGuard]  },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [UserGuard] },
   { path: 'lesson', component: LessonComponent },
+  { path: 'account/:page', component: UserAccountComponent, canActivate: [UserGuard] },
   { path: 'unauthorized', component: UnauthorizedComponent },
-  { path: '**', component: PageNotFoundComponent}
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
