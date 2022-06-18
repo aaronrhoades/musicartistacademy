@@ -4,7 +4,10 @@
 body {
     font-family: 'Montserrat', Arial, sans-serif;
 }
-
+::selection {
+    background: #4b61b3;
+    color: #fff;
+}
 app-root {
     min-height: 100%;
 }
@@ -51,6 +54,7 @@ h1 {
 //forms
 
 label {
+    font-weight: bold;
     margin-bottom: 5px;
 }
 
@@ -87,6 +91,18 @@ label {
 .vert-space {
     margin-top: 3rem;
     margin-bottom: 3rem;
+}
+
+a {
+    color: #566fcd;
+    text-decoration: none;
+    &:visited{
+        color: #566fcd
+    }
+    &:hover{
+        color: #2551f1;
+        text-decoration: underline;
+    }
 }
 
 button.btn, a.btn {
