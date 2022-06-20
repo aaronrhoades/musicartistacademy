@@ -15,7 +15,7 @@ h1 {
     font-size: 3rem;
 }
 
-.container {
+.maa-container {
     display: block;
     margin: 0;    
     padding: 20px;
@@ -127,7 +127,7 @@ button.btn, a.btn {
 }
 
 @media only screen and (min-width: 768px) {
-    .container {
+    .maa-container {
         padding: 4rem 20vw;
     }
 
