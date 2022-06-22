@@ -13,5 +13,8 @@
     },
     "jwt": {
         "expireTime": 3000
+    },
+    "stripe": {
+        "privateKey": ""
     }
 }
