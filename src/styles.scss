@@ -4,6 +4,18 @@
 body {
     font-family: 'Montserrat', Arial, sans-serif;
 }
+.light-text {
+    font-weight: 300;
+    font-size: 1.2rem;
+    font-style: italic;
+    color: #666;
+    b, strong {
+        font-weight: 600;
+    }
+}
+p.light-text {
+    margin: 2rem 0;
+}
 ::selection {
     background: #4b61b3;
     color: #fff;
@@ -57,7 +69,20 @@ label {
     font-weight: bold;
     margin-bottom: 5px;
 }
+ul.form-group {
+    list-style: none;
+    padding-left: 2rem;
 
+    li {
+        margin: 0.5rem auto;
+    }
+}
+fieldset {
+    border: 1px solid;
+    margin-bottom: 4rem;
+    border-radius: 4px;
+    box-shadow: 0 10px 10px -12px #000000aa;
+}
 .form-control {
     display: flex;
     flex-direction: column;
@@ -72,6 +97,16 @@ label {
       &:active {
           outline-color: #111;
       }
+    }
+}
+form {
+    legend {
+        font-weight: 700;
+        font-size: 1.3rem;
+    }
+    
+    label {
+        font-weight: normal;
     }
 }
 
@@ -123,6 +158,15 @@ button.btn, a.btn {
         top: 2px;
         box-shadow: none;
         background-color: darken($brand-dark, $amount: 5);
+    }
+    &.btn-danger {
+        background: $danger;
+        &:hover, &:focus {
+            background: lighten($danger, $amount: 5);
+        }
+        &:active {
+            background-color: darken($danger, $amount: 5);
+        }
     }
 }
 

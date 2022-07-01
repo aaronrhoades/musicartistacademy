@@ -1,9 +1,10 @@
-var User = require('./userModel');
+const { User, AccountInfo } = require('./userModel');
 var _ = require('lodash');
 var signToken = require('../../auth/auth').signToken;
 const config = require('../../config/config.json');
+const stripeAuth = require('../../auth/auth-stripe');
 
-exports.params = (req, res, next, id) => {
+exports.paramsId = (req, res, next, id) => {
   User.findById(id)
     .then((user) => {
       if (!user) {
@@ -20,10 +21,26 @@ exports.params = (req, res, next, id) => {
 exports.get = (req, res, next) => {
   User.find({})
     .then((users) => {
+      users.forEach(user => {
+        user.password = null;
+      })
       res.json(users);
     }, (err) => {
       next(err);
     });
+};
+
+exports.getFromToken = (req, res, next) => {
+  token = req.auth;
+  if(token && token._id) {
+    
+    User.findById(token._id).then(user => {
+      user.password = null;
+      res.json(user);
+    })
+  } else {
+    next(new Error('No token ID was found'))
+  }
 };
 
 exports.getOne = (req, res, next) => {
@@ -62,6 +79,12 @@ exports.post = (req, res, next) => {
     if(user) {
       var token = signToken(user._id, user.permissionLevel);
       res.json({idToken: token, expiresIn: config.jwt.expireTime});
+
+      var newAccount = new AccountInfo({userId: user._id});
+      newAccount.save((err, accountInfo) => {
+        if(err){next(err)}
+      });
+
     } else {
       res.status(500).send('Could not create user. A user may already exist with that email, or there was an unknown error on the server.');
       err = new Error('Could not create user');
@@ -78,4 +101,36 @@ exports.delete = (req, res, next) => {
       res.json(removed);
     }
   });
+};
+
+/*********************************
+            BILLING
+*********************************/
+
+exports.getOneAccountInfo = (req, res, next) => {
+  token = req.auth
+  let requestId = req.params.id;
+  
+  //check for same user or admin (TODO reconfig and test auth.authorizeSystemAdmin.)
+  if (token._id && (token._id === requestId))
+  AccountInfo.findOne({userId: requestId})
+    .then((accountInfo) => {
+      console.log(accountInfo);
+      if (!accountInfo) {
+        next(new Error('Could not retrieve account info'));
+      } else {
+        console.log(accountInfo); 
+        res.json(accountInfo);
+      }
+    }, (err) => {
+      next(err);
+    });
+};
+
+exports.putAccountInfo = (req, res, next) => {
+  var user = req.user;
+  var update = req.body;
+  AccountInfo.findOneAndUpdate({userId: user._id}, update).then(accInfo => {
+    res.json(accInfo)
+  })
 };

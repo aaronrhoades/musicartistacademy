@@ -9,7 +9,6 @@ export class ToastService {
   toastMessages: ReplaySubject<string> = new ReplaySubject(this.toastLimit);
   
   constructor() { 
-    this.toastMessages.subscribe({next: res => {console.log(res)}});
   }
 
   newToast(message: string) {

@@ -1,1 +1,58 @@
-<p>user-settings works!</p>
+<h1>Email Preferences</h1>
+
+<p class="light-text"><strong>We care about your mental space.</strong> We understand that emails can clutter your inbox and some companies can be deceptive about their email practices. Though email subscribers can greatly help our business in the modern age, we are committed to protecting your email and respecting your preferences.</p>
+<p class="light-text">Please select the options that work best for you.</p>
+<form (submit)="save()" [formGroup]="form">
+    <fieldset>
+        <legend>
+            You are subscribed to recieve emails about
+        </legend>
+        <ul class="form-group" [formGroup]="subscriptions">
+            <li>
+                <label>
+                    <input type="checkbox" disabled checked> Information Pertaining to Your Account
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" formControlName="personalSummary"> Your Personal Summary
+                </label> <i style="color:#aaa">(courses in progress, "where you last left off", etc.)</i>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" formControlName="webApp"> Application Updates and News
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" formControlName="community"> Community News
+                </label>
+            </li>
+        </ul>
+    </fieldset>
+
+    <fieldset>
+        <legend>Your maximum email frequency is</legend>
+        <ul class="form-group">
+            <li>
+                <label>
+                    <input type="radio" name="subscriptionFreq" value="daily" formControlName="subscriptionFreq"> Daily
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="radio" name="subscriptionFreq" value="weekly" formControlName="subscriptionFreq"> Weekly
+                </label>
+            </li>
+            <li>
+                <label>    
+                    <input type="radio" name="subscriptionFreq" value="monthly" formControlName="subscriptionFreq"> Monthly
+                </label>
+            </li>
+        </ul>
+    </fieldset>
+
+    <div class="d-flex flex-row justify-end">
+        <button type="submit" class="btn">Save</button>
+    </div>
+</form>

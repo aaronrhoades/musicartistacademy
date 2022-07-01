@@ -81,8 +81,5 @@ export class AuthService {
       })
     );
   }
-  
-  updateUser(user: User) {
-    return this.http.put(this.environment.api + '/users/' + user.id, user);
-  }
+
 }

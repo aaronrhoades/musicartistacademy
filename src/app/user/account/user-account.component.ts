@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, NavigationEnd, Router, RouterEvent } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { User } from 'src/app/shared/models/user/user';
+import { AuthService } from '../auth.service';
+import { UserService } from '../user.service';
 type UserAcountPage = 'settings' | 'billing';
 
 @Component({
@@ -12,12 +15,19 @@ type UserAcountPage = 'settings' | 'billing';
 export class UserAccountComponent implements OnInit {
   private currentStepBs: BehaviorSubject<UserAcountPage> = new BehaviorSubject<UserAcountPage>('settings');
   public currentStep$: Observable<UserAcountPage> = this.currentStepBs.asObservable();
+  userInfo: User = new User();
+
   public userForm: FormGroup = this.fb.group({
     settings: null,
     billing: null
   });
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private userService: UserService,
+    private authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -30,6 +40,12 @@ export class UserAccountComponent implements OnInit {
         this.setPageFromRoute();
       }
     })
+
+    this.userService.getFullCurrentUser().subscribe({
+      next: res => {
+        this.userInfo = res;
+      }
+    });
   }
 
   setPageFromRoute(){
@@ -37,6 +53,10 @@ export class UserAccountComponent implements OnInit {
     if (accountPage) {
       this.currentStepBs.next(accountPage);
     }
+  }
+
+  saveAll(){
+
   }
 
 }

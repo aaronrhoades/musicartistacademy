@@ -4,23 +4,24 @@
     <nav class="sidebar">
         <h3>Settings</h3>
         <ul class="menu">
-            <li class="menu-item"><a routerLink="/account/settings" routerLinkActive="test">Account Settings</a></li>
-            <li class="menu-item"><a routerLink="/account/billing">Billing</a></li>
+            <li class="menu-item"><a routerLink="/account/settings" routerLinkActive="active">Account Settings</a></li>
+            <li class="menu-item"><a routerLink="/account/email-preferences" routerLinkActive="active">Email Preferences</a></li>
+            <li class="menu-item"><a routerLink="/account/billing" routerLinkActive="active">Billing</a></li>
         </ul>
     </nav>
     <div class="maa-container">
         <ng-container [ngSwitch]="currentStep$ | async">
-            <app-user-settings 
-            *ngSwitchCase="'settings'" 
-            ></app-user-settings>
-            <app-user-billing 
-            *ngSwitchCase="'billing'" 
-            ></app-user-billing>
+            <app-register *ngSwitchCase="'settings'" [user]="userInfo" [newUser]="false">
+            </app-register>
+            <app-user-settings *ngSwitchCase="'email-preferences'" [accountInfo]="userInfo.accountInfo || null">
+            </app-user-settings>
+            <app-user-billing *ngSwitchCase="'billing'">
+
+            </app-user-billing>
             <!-- [startingForm]="userForm.get('billing').value" 
                 (subformInitialized)="subformInitialized('billing', $event)" 
                 (changeStep)="changeStep('billingStep', 'back')"
                 (submitForm)="submitForm()" -->
         </ng-container>
-            
     </div>
 </div>

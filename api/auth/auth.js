@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
 const config = require('../config/config.json');
-const User = require('../src/users/userModel');
+const { User } = require('../src/users/userModel');
 var fs = require("fs");
 
 const RSA_PRIVATE_KEY = fs.readFileSync('auth/keys/jwtRS256.key');
@@ -33,6 +33,7 @@ exports.getFreshUser = function() {
         } else {
           // update req.user with fresh user from
           // stale token data
+          user.password = null;
           req.user = user;
           next();
         }
@@ -96,10 +97,18 @@ exports.authorizeTeacher = (req, res, next) => {
   });
 }
 
+//System admin OR Same User
 exports.authorizeSystemAdmin = (req, res, next) => {
-  let authId = req.auth._id;
+  let reqId = req.params.id;
+  let authId = req.auth._id
+
   User.findOne({_id: authId}).then((user)=> {
-    if(user.permissionLevel.includes('system')) {
+    if(reqId === user._id.toString()) {
+      //same user
+      next();
+    }
+    else if(user.permissionLevel.includes('system')) {
+      //admin
       next();
     } else {
       res.status(401).send('System admin permissions not found');

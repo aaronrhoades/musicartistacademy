@@ -1,3 +1,23 @@
+enum subscriptionFreq {
+    Monthly ='monthly',
+    Weekly ='weekly',
+    Daily = 'daily'
+}
+
+export type AccountInfo = {
+    userId: string,
+    subscriptions: {
+        personalSummary: boolean,
+        webApp: boolean,
+        community: boolean
+    },
+    subscriptionFreq: subscriptionFreq, 
+    stripeCustomer?: {
+        id: String,
+        delinquent: Boolean
+    }
+}
+
 export class Contact {
     id?: string;
     email: string;
@@ -45,30 +65,37 @@ export class Login {
 }
 
 export class User {
-    id?: string;
-    password: string;
-    artistNames: string[];
+    _id?: string;
+    email: string;
+    accountInfo?: AccountInfo;
+    password?: string;
+    firstName: string;
+    lastName: string;
+    artistName?: string;
     bandConnections: { role: string, bandName: string }[];
     lessonsOwned: string[];
     productsOwned: string[];
-    contactInfo: Contact;
+
     options: {key: string, value: string}[];
 
     constructor(options?: {
+        email: string;
         password?: string,
-        artistNames?: string[],
+        artistName?: string,
         bandConnections?: { role: string, bandName: string }[],
         lessonsOwned?: string[],
         productsOwned?: string[],
         contactInfo?: Contact
         options?: {key: string, value: string}[]
     }) {
+        this.firstName = '';
+        this.lastName = '';
+        this.email = options?.email || '';
         this.password = '';
-        this.artistNames = options?.artistNames || [];
+        this.artistName = options?.artistName || '';
         this.bandConnections = options?.bandConnections || [];
         this.lessonsOwned = options?.lessonsOwned || [];
         this.productsOwned = options?.productsOwned || [];
-        this.contactInfo = options?.contactInfo || new Contact();
         this.options = options?.options || [];
     }
 }
