@@ -64,6 +64,15 @@ export class RegisterComponent implements OnInit, OnChanges {
     if(changes['user']) {
       this.registerForm.patchValue(this.user);
     }
+    if(changes['newUser'] && this.newUser === false) {
+      this.userService.getFullCurrentUser().subscribe(
+        {
+          next: res => {
+            this.registerForm.patchValue(res)
+          }
+        }
+      );
+    }
   }
   get email() { return this.registerForm.get('email'); }
   get password() { return this.registerForm.get('password'); }
@@ -116,7 +125,10 @@ export class RegisterComponent implements OnInit, OnChanges {
         }
       });
     } else {
-      this.userService.updateUser(this.registerForm.value).subscribe({
+      let user = this.registerForm.value as User;
+      user._id = this.user._id;
+
+      this.userService.updateUser(user).subscribe({
         next: res => {
           this.toastService.newToast('Account information updated successfully');
         },
