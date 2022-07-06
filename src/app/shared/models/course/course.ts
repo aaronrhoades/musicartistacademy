@@ -6,25 +6,39 @@ export class Course {
     body: string = '';
     description: string = '';
     featureImageUrl?: string;
-    constructor() {
-    }
+    modules: [{
+        title: string;
+        description: string;
+        videoUrl: string;
+        lessonIds: Lesson[];
+    }?] = [];
 }
 
-export class Lesson extends PostBase {
-    teacherIds: string[];
-    videoUrl?: string;
-    excerciseIds?: string[];
-    comments?: Array<BasicComment> = [];
-
-    constructor() {
-        super();
-        this.teacherIds = [];
-        this.videoUrl = '';
-        this.excerciseIds = [];
-        this.comments = [];
-        this.postType = 'lesson';
-    }
+export class Lesson {
+    _id?: string;
+    title:string = '';
+    description: string = '';
+    teacherIds: string[] = [];
+    body: string = '';
+    featureImageUrl?: string = '';
+    videoUrl?: string ='';
 }
+
+// export class Lesson extends PostBase {
+//     teacherIds: string[];
+//     videoUrl?: string;
+//     excerciseIds?: string[];
+//     comments?: Array<BasicComment> = [];
+
+//     constructor() {
+//         super();
+//         this.teacherIds = [];
+//         this.videoUrl = '';
+//         this.excerciseIds = [];
+//         this.comments = [];
+//         this.postType = 'lesson';
+//     }
+// }
 
 export class Exercise extends PostBase {    
     attachments: FileList;

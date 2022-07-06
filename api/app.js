@@ -6,6 +6,7 @@ const config = require('./config/config.json');
 const port = config.server.port;
 const userRouter = require('./src/users/userRouter');
 const courseRouter = require('./src/courses/courseRouter');
+const lessonRouter = require('./src/courses/lessons/lessonRouter');
 const auth = require('./auth/auth');
 
 require('mongoose').connect(config.db.url, {dbName: config.db.name});
@@ -21,6 +22,7 @@ app.use('/resources', express.static(__dirname +  '/resources'));
 app.use(express.json());
 app.use('/users', userRouter);
 app.use('/courses', courseRouter);
+app.use('/lessons', lessonRouter);
 
 
 

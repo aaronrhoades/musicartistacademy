@@ -17,6 +17,6 @@ export class DashboardComponent implements OnInit {
   
   ngOnInit(): void {
     this.myCourses$ = this.courseLessonService.coursesByUserId$();
-    this.recentLessons$ = this.courseLessonService.recentLessons$();
+    this.recentLessons$ = this.courseLessonService.lessonsByUserId$();
   }
 }

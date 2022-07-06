@@ -1,22 +1,5 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var LessonSchema = new Schema({
-  title: {
-    type: String,
-    required: true,
-    default: ''
-  },
-  description: {
-    type: String,
-    required: true,
-    default: ''
-  },
-  body: {
-    type: String,
-    required: true,
-    default: ''
-  }
-});
 
 var ModuleSchema = new Schema({
   title: {
@@ -29,14 +12,9 @@ var ModuleSchema = new Schema({
     required: true,
     default: ''
   },
-  body: {
-    type: String,
-    required: true,
-    default: ''
-  },
   videoUrl: String,
-  lessons: {
-    type: [LessonSchema]
+  lessonIds: {
+    type: [Schema.Types.ObjectId]
   }
 });
 

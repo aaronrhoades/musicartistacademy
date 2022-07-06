@@ -1,0 +1,41 @@
+<div class="maa-container">
+    <h1>
+        {{isNewLesson ? 'Add New Lesson':'Edit Lesson'}}
+    </h1>
+    <form [formGroup]="form" (submit)="saveLesson()">
+        <!-- ID -->
+        <div class="form-control" *ngIf="!isNewLesson">
+            <label for="_id">ID</label>
+            <input type="text" readonly formControlName="_id">
+        </div>
+        <!-- Title -->
+        <div class="form-control">
+            <label for="title">Title</label>
+            <input type="text" formControlName="title" id="title">
+            <div class="input-error">
+                <div *ngIf="title?.errors?.['required']">
+                    Title is required
+                </div>
+            </div>
+        </div>
+        <!-- Feature Image URL -->
+        <div class="form-control">
+            <label for="featureImageUrl">Feature Image URL</label>
+            <input type="text" formControlName="featureImageUrl" id="featureImageUrl">
+        </div>
+        <!-- Description -->
+        <div class="form-control">
+            <label for="description">Short Description</label>
+            <textarea formControlName="description" id="description" rows="5"></textarea>
+        </div>
+        <!-- Body -->
+        <div class="form-control">
+            <label for="body">Body</label>
+            <textarea formControlName="body" id="body" rows="10"></textarea>
+        </div>
+        <app-error-alert [errors]="errors"></app-error-alert>
+        <div class="d-flex flex-row justify-end">
+            <button type="submit" class="btn">Save</button>
+        </div>
+    </form>
+</div>

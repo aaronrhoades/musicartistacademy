@@ -2,11 +2,18 @@
     <h1>Admin Menu</h1>
     <ul>
         <li><a routerLink="courses/new">Create a New Course</a></li>
+        <li><a routerLink="lessons/new">Create a New Lesson</a></li>
     </ul>
     <h2>My Courses</h2>
     <ul>
         <li *ngFor="let course of myCourses$ | async; index as i">
             <a [routerLink]="['courses/',course._id]">{{course.title}}</a>
+        </li>
+    </ul>
+    <h2>My Lessons</h2>
+    <ul>
+        <li *ngFor="let lesson of myLessons$ | async">
+            <a [routerLink]="['lessons/', lesson._id]">{{lesson.title}}</a>
         </li>
     </ul>
 </div>

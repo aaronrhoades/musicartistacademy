@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   public login: Login = new Login();
   errors: string[] = [];
   public changedSinceLastSubmit: boolean = false;
+
   public loginForm: FormGroup = this.fb.group({
     email: new FormControl('',
     {
@@ -36,14 +37,17 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.changedSinceLastSubmit = true;
     }});
   }
+
   ngOnDestroy(): void {
     this.authService.errors.next([]); 
   }
+
   showErrorsWhenInvalid() {
     this.errors = [];
     this.loginForm.markAllAsTouched();
   }
-  loginSubmit() {    
+
+  loginSubmit() {
     let urlTree = this.authService.nextPage.value;
 
     if(this.loginForm.valid && this.changedSinceLastSubmit) {
@@ -60,7 +64,11 @@ export class LoginComponent implements OnInit, OnDestroy {
             }
           },
           error: err => {
-            this.errors = [err.error];
+            if (err.error && err.status === 0) {
+              this.errors = ['Sorry, there was an error communicating with the server']
+            } else {
+              this.errors = [err.error];
+            }
           }
         });
     } else {

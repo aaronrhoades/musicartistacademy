@@ -98,7 +98,7 @@ exports.authorizeTeacher = (req, res, next) => {
 }
 
 //System admin OR Same User
-exports.authorizeSystemAdmin = (req, res, next) => {
+exports.authorizeSystemAdminOrSameUser = (req, res, next) => {
   let reqId = req.params.id;
   let authId = req.auth._id
 
@@ -108,6 +108,21 @@ exports.authorizeSystemAdmin = (req, res, next) => {
       next();
     }
     else if(user.permissionLevel.includes('system')) {
+      //admin
+      next();
+    } else {
+      res.status(401).send('System admin permissions not found');
+    }
+  });
+}
+
+//System admin OR Same User
+exports.authorizeSystemAdmin = (req, res, next) => {
+  let reqId = req.params.id;
+  let authId = req.auth._id
+
+  User.findOne({_id: authId}).then((user)=> {
+    if(user.permissionLevel.includes('system')) {
       //admin
       next();
     } else {

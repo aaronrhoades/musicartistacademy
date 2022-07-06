@@ -2,18 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CourseLessonService } from 'src/app/courses-lessons/course-lesson.service';
-import { AuthService } from 'src/app/user/auth.service';
-import { Course } from 'src/app/shared/models/course/course';
+import { Lesson } from 'src/app/shared/models/course/course';
 import { ToastService } from 'src/app/shared/toast/toast.service';
+import { AuthService } from 'src/app/user/auth.service';
 import { AdminService } from '../../admin.service';
 
 @Component({
-  selector: 'app-course',
-  templateUrl: './course.component.html',
-  styleUrls: ['./course.component.scss']
+  selector: 'app-lesson',
+  templateUrl: './lesson.component.html',
+  styleUrls: ['./lesson.component.scss']
 })
-export class CreateCourseComponent implements OnInit {
-  isNewCourse: boolean = true;
+export class CreateLessonComponent implements OnInit {
+  isNewLesson: boolean = true;
   errors: string[] = [];
 
   form: FormGroup = this.fb.group({
@@ -22,12 +22,7 @@ export class CreateCourseComponent implements OnInit {
     featureImageUrl: this.fb.control(''),
     description: this.fb.control(''),
     body: this.fb.control(''),
-    modules: this.fb.array([{
-      title: this.fb.control(''),
-      description: this.fb.control(''),
-      videoUrl: this.fb.control(''),
-      lessonIds: this.fb.array([this.fb.control('')])
-    }])
+    modules: this.fb.array([])
   });
 
   get _id() { return this.form.get('_id') as FormControl }
@@ -44,33 +39,33 @@ export class CreateCourseComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const classId = this.route.snapshot.paramMap.get('id');
-    if (classId && classId != null) {
-      this.isNewCourse = false;
-      this.courseService.courseById$(String(classId)).subscribe({
+    const lessonId = this.route.snapshot.paramMap.get('id');
+    if (lessonId && lessonId != null) {
+      this.isNewLesson = false;
+      this.courseService.lessonById$(String(lessonId)).subscribe({
           next: res => {
-            let course = res as Course;
+            let course = res as Lesson;
             this.form.patchValue(course);
           }
         });
     }
   }
-  saveCourse() {
+  saveLesson() {
     this.errors = [];
     if(!this.form.valid){
       this.errors.push('Form is invalid. Please check fields.');
       return;
     }
-    if (!this.isNewCourse){
-      this.updateCourse(this._id.value)
+    if (!this.isNewLesson){
+      this.updateLesson(this._id.value)
       return;
     }
 
-    let formValue = this.form.value as Course;
+    let formValue = this.form.value as Lesson;
     delete formValue._id; //to avoid errors in BE;
     console.log(this.form.value);
 
-    this.adminService.saveCourse$(formValue).subscribe({
+    this.adminService.saveLesson$(formValue).subscribe({
       next: res => {
         // if (res.body?.){}
         if(res === null){
@@ -78,7 +73,7 @@ export class CreateCourseComponent implements OnInit {
         }        
         else if (res._id) {
           this.toastService.newToast('Course created successfully');
-          this.router.navigate(['admin/courses', res._id]);
+          this.router.navigate(['admin/lessons', res._id]);
         }
       },
       error: err => {
@@ -92,8 +87,8 @@ export class CreateCourseComponent implements OnInit {
       
     });
   }
-  updateCourse(_id: string) {
-    this.adminService.updateCourse$(_id, this.form.value as Course).subscribe(
+  updateLesson(_id: string) {
+    this.adminService.updateLesson$(_id, this.form.value as Lesson).subscribe(
       {
         next: res => {
           if(res._id)

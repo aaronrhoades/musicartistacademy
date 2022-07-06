@@ -20,7 +20,7 @@ router.route('/login')
   .post(verifyUser, userController.login)
 
 router.route('/account-info/:id')
-  .get(auth.decodeToken, auth.authorizeSystemAdmin, userController.getOneAccountInfo)
+  .get(auth.decodeToken, auth.authorizeSystemAdminOrSameUser, userController.getOneAccountInfo)
   .put(auth.decodeToken, userController.putAccountInfo)
   // .delete(userController.delete)
 
