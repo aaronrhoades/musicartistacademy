@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CourseLessonService } from 'src/app/courses-lessons/course-lesson.service';
 import { AuthService } from 'src/app/user/auth.service';
-import { Course } from 'src/app/shared/models/course/course';
+import { Course, Lesson } from 'src/app/shared/models/course/course';
 import { ToastService } from 'src/app/shared/toast/toast.service';
 import { AdminService } from '../../admin.service';
 
@@ -22,16 +22,13 @@ export class CreateCourseComponent implements OnInit {
     featureImageUrl: this.fb.control(''),
     description: this.fb.control(''),
     body: this.fb.control(''),
-    modules: this.fb.array([{
-      title: this.fb.control(''),
-      description: this.fb.control(''),
-      videoUrl: this.fb.control(''),
-      lessonIds: this.fb.array([this.fb.control('')])
-    }])
+    modules: this.fb.array([])
   });
 
   get _id() { return this.form.get('_id') as FormControl }
-  get title() { return this.form.get('title') as FormControl}
+  get title() { return this.form.get('title') as FormControl }
+  get modules() { return this.form.get('modules') as FormArray }
+  getLessonIds(index: number) : FormArray {return (this.modules.controls[index] as FormGroup)?.get('lessonIds') as FormArray}
 
   constructor(
     private fb: FormBuilder,
@@ -51,10 +48,42 @@ export class CreateCourseComponent implements OnInit {
           next: res => {
             let course = res as Course;
             this.form.patchValue(course);
+            course.modules.forEach((x, i) => {
+              this.modules.push(this.fb.group({
+                ...x,
+                lessonIds: this.fb.array(x?.lessonIds as Array<Lesson>)
+              }))
+            });
           }
         });
     }
   }
+
+  addModule() {
+    let newModule = this.fb.group({
+      title: [''],
+      description: [''],
+      videoUrl: [''],
+      lessonIds: this.fb.array([''])
+    });
+
+    this.modules.push(newModule);
+  }
+
+  removeModule(index: number) {
+    this.modules.removeAt(index);
+  }
+
+  addLesson(index: number) {
+    let lessons = this.modules.get(String(index))?.get('lessonIds') as FormArray;
+    lessons.push(this.fb.control(''));
+  }
+
+  removeLesson(index: number, ind: number) {
+    let lessons = this.modules.get(String(index))?.get('lessonIds') as FormArray;
+    lessons.removeAt(ind);
+  }
+
   saveCourse() {
     this.errors = [];
     if(!this.form.valid){

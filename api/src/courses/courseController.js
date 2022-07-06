@@ -1,4 +1,5 @@
 var Course = require('./courseModel');
+const mongoose = require('mongoose');
 var _ = require('lodash');
 
 exports.params = function(req, res, next, id) {
@@ -48,7 +49,9 @@ exports.put = function(req, res, next) {
 
 exports.post = function(req, res, next) {
   var newCourse = new Course(req.body);
-
+  req.body.modules.forEach(x => {
+    x.lessonIds = x.lessonIds.map(y => new mongoose.Types.ObjectId(y))
+  });
     newCourse.save(function(err, course) {
       if(err) {next(err);}
 

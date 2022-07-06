@@ -33,9 +33,42 @@
             <label for="body">Body</label>
             <textarea formControlName="body" id="body" rows="10"></textarea>
         </div>
+        <div class="maa-modules" formArrayName="modules">
+            <h2>Modules</h2>
+            <button (click)="addModule()" type="button">Add a Module</button>
+            <div *ngFor="let module of modules.controls; let index = index">
+                <h3>Module {{index + 1}}</h3>
+                <div [formGroupName]="index">
+                    <div class="form-control">
+                        <label>
+                            Title
+                            <input type="text" formControlName="title">
+                        </label>
+                    </div>
+                    <div class="form-control">
+                        <label>
+                            Description
+                            <input type="text" formControlName="description">
+                        </label>
+                    </div>
+                    <!-- <input type="text" formControlName="videoUrl"> -->
+                    <div formArrayName="lessonIds">
+                        <button (click)="addLesson(index)" type="button">Add Lesson</button>
+                        <div *ngFor="let lesson of getLessonIds(index).controls; let ind = index">
+                            <label>
+                                <input type="text" formControlName="{{ind}}">
+                            </label>
+                            <button (click)="removeLesson(index, ind)" type="button">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <app-error-alert [errors]="errors"></app-error-alert>
         <div class="d-flex flex-row justify-end">
             <button type="submit" class="btn">Save</button>
         </div>
+        
     </form>
 </div>
