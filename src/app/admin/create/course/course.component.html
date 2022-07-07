@@ -35,9 +35,10 @@
         </div>
         <div class="maa-modules" formArrayName="modules">
             <h2>Modules</h2>
-            <button (click)="addModule()" type="button">Add a Module</button>
+            <button (click)="addModule()" type="button" class="btn">Add a Module</button>
             <div *ngFor="let module of modules.controls; let index = index">
                 <h3>Module {{index + 1}}</h3>
+                <button class="btn btn-danger" type="button" (click)="removeModule(index)">Delete</button>
                 <div [formGroupName]="index">
                     <div class="form-control">
                         <label>
@@ -52,14 +53,20 @@
                         </label>
                     </div>
                     <!-- <input type="text" formControlName="videoUrl"> -->
-                    <div formArrayName="lessonIds">
-                        <button (click)="addLesson(index)" type="button">Add Lesson</button>
-                        <div *ngFor="let lesson of getLessonIds(index).controls; let ind = index">
+                    <div formArrayName="lessonIds" class="lessons">
+                        <h2>
+                            Lessons
+                        </h2>
+                        <div *ngFor="let lesson of getLessonIds(index).controls; let ind = index" class="form-control">
                             <label>
-                                <input type="text" formControlName="{{ind}}">
+                                Lesson {{ind + 1}} <!--TODO: Change to select box based on lessons-->
                             </label>
-                            <button (click)="removeLesson(index, ind)" type="button">Delete</button>
+                            <div>
+                                <input type="text" formControlName="{{ind}}">
+                                <button (click)="removeLesson(index, ind)" type="button" class="btn btn-danger">Delete</button>
+                            </div>
                         </div>
+                        <button (click)="addLesson(index)" type="button" class="btn">Add Lesson</button>
                     </div>
                 </div>
             </div>
