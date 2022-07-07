@@ -35,10 +35,12 @@
         </div>
         <div class="maa-modules" formArrayName="modules">
             <h2>Modules</h2>
-            <button (click)="addModule()" type="button" class="btn">Add a Module</button>
+            <button (click)="addModule()" type="button" class="btn btn-success">Add Module</button>
             <div *ngFor="let module of modules.controls; let index = index">
-                <h3>Module {{index + 1}}</h3>
-                <button class="btn btn-danger" type="button" (click)="removeModule(index)">Delete</button>
+                <div class="admin-module-header d-flex justify-content-between align-items-center">
+                    <h3>Module {{index + 1}}</h3>
+                    <button class="btn btn-danger" type="button" (click)="removeModule(index)">Delete</button>
+                </div>
                 <div [formGroupName]="index">
                     <div class="form-control">
                         <label>
@@ -70,6 +72,7 @@
                     </div>
                 </div>
             </div>
+            <button (click)="addModule()" type="button" class="btn add-module-btn btn-success" *ngIf="modules.length > 0">Add Module</button>
         </div>
 
         <app-error-alert [errors]="errors"></app-error-alert>

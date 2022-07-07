@@ -168,6 +168,15 @@ button.btn, a.btn {
             background-color: darken($danger, $amount: 5);
         }
     }
+    &.btn-success {
+        background: $success;
+        &:hover, &:focus {
+            background: lighten($success, $amount: 5);
+        }
+        &:active {
+            background-color: darken($success, $amount: 5);
+        }
+    }
 }
 
 @media only screen and (min-width: 768px) {
