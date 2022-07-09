@@ -50,4 +50,4 @@ Thumbs.db
 /api/config/*
 !/api/config/config-example.json
 /api/auth/keys/*
-/resources/*
+/api/resources/*
