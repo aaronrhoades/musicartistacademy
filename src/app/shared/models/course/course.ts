@@ -6,6 +6,7 @@ export class Course {
     body: string = '';
     description: string = '';
     featureImageUrl?: string;
+    videoUrl?: string;
     modules: [{
         title: string;
         description: string;

@@ -20,6 +20,7 @@ export class CreateCourseComponent implements OnInit {
     _id: this.fb.control(''),
     title: this.fb.control('',[Validators.required]),
     featureImageUrl: this.fb.control(''),
+    videoUrl: this.fb.control(''),
     description: this.fb.control(''),
     body: this.fb.control(''),
     modules: this.fb.array([])

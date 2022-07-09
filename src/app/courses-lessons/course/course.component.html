@@ -1,7 +1,14 @@
 <div class="maa-container" *ngIf="course$ | async let course">
-    <img [src]="course.featureImageUrl" alt="">
+    <div class="feature-image" *ngIf="!course.videoUrl || course.videoUrl === ''">
+        <img [src]="course.featureImageUrl" alt="" class="media">
+    </div>
     <h1>{{course.title}}</h1>
-    <p>{{course.description}}</p>
+    <div class="maa-video">
+        <video controls="controls">
+            <source type="video/mp4" src="{{environment.api + '/resources/' + course.videoUrl}}">
+        </video>
+    </div>
+    <p>{{course.body}}</p>
     <!-- <ng-template *ngFor="let id of course.lessonIds">
         <div class="card">
             
