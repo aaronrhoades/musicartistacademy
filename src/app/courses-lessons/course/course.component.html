@@ -3,12 +3,12 @@
         <img [src]="course.featureImageUrl" alt="" class="media">
     </div>
     <h1>{{course.title}}</h1>
-    <div class="maa-video">
+    <div class="maa-video" *ngIf="course.videoUrl">
         <video controls="controls">
             <source type="video/mp4" src="{{environment.api + '/resources/' + course.videoUrl}}">
         </video>
     </div>
-    <p>{{course.body}}</p>
+    <div [innerHTML]="course.body"></div>
     <!-- <ng-template *ngFor="let id of course.lessonIds">
         <div class="card">
             

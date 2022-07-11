@@ -9,8 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ErrorAlertModule } from '../shared/error-alert/error-alert.module';
 import { ToastModule } from '../shared/toast/toast.module';
 import { CreateLessonComponent } from './create/lesson/lesson.component';
-
-
+import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 
 @NgModule({
   declarations: [
@@ -20,11 +19,15 @@ import { CreateLessonComponent } from './create/lesson/lesson.component';
   ],
   imports: [
     CommonModule,
+    EditorModule,
     AdminRoutingModule,
     ReactiveFormsModule,
     ErrorAlertModule,
     ToastModule
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}]
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: TINYMCE_SCRIPT_SRC, useValue: 'assets/tinymce/tinymce.min.js' }
+  ]
 })
 export class AdminModule { }

@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/user/auth.service';
 import { Course, Lesson } from 'src/app/shared/models/course/course';
 import { ToastService } from 'src/app/shared/toast/toast.service';
 import { AdminService } from '../../admin.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-course',
@@ -15,6 +16,7 @@ import { AdminService } from '../../admin.service';
 export class CreateCourseComponent implements OnInit {
   isNewCourse: boolean = true;
   errors: string[] = [];
+  declare myLessons$: Observable<Lesson[]>;
 
   form: FormGroup = this.fb.group({
     _id: this.fb.control(''),
@@ -33,7 +35,7 @@ export class CreateCourseComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private courseService: CourseLessonService,
+    private courseLessonService: CourseLessonService,
     private adminService: AdminService,
     private authService: AuthService,
     private route: ActivatedRoute,
@@ -42,10 +44,12 @@ export class CreateCourseComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.myLessons$ = this.courseLessonService.lessonsByTeacherId$();
+
     const classId = this.route.snapshot.paramMap.get('id');
     if (classId && classId != null) {
       this.isNewCourse = false;
-      this.courseService.courseById$(String(classId)).subscribe({
+      this.courseLessonService.courseById$(String(classId)).subscribe({
           next: res => {
             let course = res as Course;
             this.form.patchValue(course);

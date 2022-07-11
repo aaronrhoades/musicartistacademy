@@ -31,7 +31,20 @@
         <!-- Body -->
         <div class="form-control">
             <label for="body">Body</label>
-            <textarea formControlName="body" id="body" rows="10"></textarea>
+            <editor formControlName="body" [init]="{
+                height: 500,
+                menubar: false,
+                plugins: [
+                  'advlist autolink lists link image charmap print preview anchor',
+                  'searchreplace visualblocks code fullscreen',
+                  'insertdatetime media table paste code help wordcount'
+                ],
+                toolbar:
+                  'undo redo | formatselect | bold italic link backcolor | \
+                  alignleft aligncenter alignright alignjustify | \
+                  bullist numlist outdent indent | removeformat | help'
+              }"
+            ></editor>
         </div>
         <app-error-alert [errors]="errors"></app-error-alert>
         <div class="d-flex flex-row justify-end">
