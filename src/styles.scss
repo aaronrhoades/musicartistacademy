@@ -90,7 +90,6 @@ fieldset {
 
     input, select {
       padding: 10px;
-      border: 1px solid #666;
       border-radius: 2px;
       line-height: 20px;
 
@@ -103,6 +102,9 @@ form {
     legend {
         font-weight: 700;
         font-size: 1.3rem;
+    }
+    input[type="text"], textarea, select {
+        border: 1px solid #ccc;
     }
 }
 

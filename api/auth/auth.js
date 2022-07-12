@@ -60,7 +60,7 @@ exports.verifyUser = (req, res, next) => {
         if (!user) {
           res.status(401).send('User not found. Please check to see if you have the correct email address');
         } else {
-          // checking the passowords here
+          // checking the passwords here
           if (!user.authenticate(password)) {
             res.status(401).send('Password is incorrect, please try again');
           } else {
@@ -116,7 +116,7 @@ exports.authorizeSystemAdminOrSameUser = (req, res, next) => {
   });
 }
 
-//System admin OR Same User
+//System admin only
 exports.authorizeSystemAdmin = (req, res, next) => {
   let reqId = req.params.id;
   let authId = req.auth._id

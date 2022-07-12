@@ -13,10 +13,11 @@ import { environment } from 'src/environments/environment';
 export class CourseComponent implements OnInit {
   public environment = environment;
   public course$: Observable<Course> = new Observable();
+  
   constructor(
     private courseLessonService: CourseLessonService,
     private route: ActivatedRoute
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     const classId = this.route.snapshot.paramMap.get('id');
