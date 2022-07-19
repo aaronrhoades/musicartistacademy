@@ -88,7 +88,8 @@ fieldset {
     flex-direction: column;
     margin: 15px 0;
 
-    input, select {
+    input, select, textarea {
+      border: 1px solid #ccc;
       padding: 10px;
       border-radius: 2px;
       line-height: 20px;
@@ -102,9 +103,6 @@ form {
     legend {
         font-weight: 700;
         font-size: 1.3rem;
-    }
-    input[type="text"], textarea, select {
-        border: 1px solid #ccc;
     }
 }
 
