@@ -30,7 +30,7 @@ export class CreateLessonComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private courseService: CourseLessonService,
+    private courseLessonService: CourseLessonService,
     private adminService: AdminService,
     private authService: AuthService,
     private route: ActivatedRoute,
@@ -42,12 +42,12 @@ export class CreateLessonComponent implements OnInit {
     const lessonId = this.route.snapshot.paramMap.get('id');
     if (lessonId && lessonId != null) {
       this.isNewLesson = false;
-      this.courseService.lessonById$(String(lessonId)).subscribe({
-          next: res => {
-            let course = res as Lesson;
-            this.form.patchValue(course);
-          }
-        });
+      this.courseLessonService.lessonById$(String(lessonId)).subscribe({
+        next: res => {
+          let lesson = res as Lesson;
+          this.form.patchValue(lesson);
+        }
+      });
     }
   }
   saveLesson() {
