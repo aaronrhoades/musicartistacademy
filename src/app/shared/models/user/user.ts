@@ -1,3 +1,5 @@
+import { PermissionLevels } from "src/app/user/auth.service";
+
 enum subscriptionFreq {
     Monthly ='monthly',
     Weekly ='weekly',
@@ -72,6 +74,7 @@ export class User {
     firstName: string;
     lastName: string;
     artistName?: string;
+    permissionLevel: PermissionLevels[] = [];
     bandConnections: { role: string, bandName: string }[];
     lessonsOwned: string[];
     productsOwned: string[];

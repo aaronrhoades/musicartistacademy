@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.authService.errors.next([]); 
+    this.authService.resetNextPage();
   }
 
   showErrorsWhenInvalid() {
@@ -56,7 +57,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           next: (response) => {
             this.authService.errors.next([]);
             if(response.idToken) {
-              if (urlTree) {
+              if (urlTree.length) {
                 this.router.navigate(urlTree);
                 return
               }

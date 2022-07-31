@@ -137,6 +137,7 @@ a {
 }
 
 button.btn, a.btn {
+    cursor: pointer;
     padding: 10px 20px;
     background: $brand-dark;
     text-decoration: none;

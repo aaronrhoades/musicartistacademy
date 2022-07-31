@@ -11,7 +11,7 @@ export class Course {
         title: string;
         description: string;
         videoUrl: string;
-        lessonIds: Lesson[];
+        lessonIds: string[];
     }?] = [];
 }
 
@@ -23,6 +23,8 @@ export class Lesson {
     body: string = '';
     featureImageUrl?: string = '';
     videoUrl?: string ='';
+    homework?: string = '';
+    exercise?: string = '';
 }
 
 // export class Lesson extends PostBase {

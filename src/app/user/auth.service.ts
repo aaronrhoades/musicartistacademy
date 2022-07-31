@@ -29,6 +29,10 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
+  resetNextPage(){
+    this.nextPage.next(['dashboard'])
+  }
+
   // Authorization
   getCurrentUserTokenClient() {
     let tokenPayload = localStorage.getItem('id_token')?.split('.')[1];
@@ -57,7 +61,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem("id_token");
     localStorage.removeItem("expires_at");
-    this.isUserLoggedIn.next(this.isLoggedIn());
+    this.isUserLoggedIn.next(false);
   }
 
   public isLoggedIn(): boolean {

@@ -17,6 +17,16 @@ var LessonSchema = new Schema({
     required: true,
     default: ''
   },
+  homework: {
+    type: String,
+    required: false,
+    default: ''
+  },
+  exercise: {
+    type: String,
+    required: false,
+    default: ''
+  },
   teacherIds: [Schema.Types.ObjectId],
   featureImageUrl: String,
   videoUrl: String,

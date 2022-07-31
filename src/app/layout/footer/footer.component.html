@@ -1,10 +1,13 @@
 <footer>
-    <ul>
+    <div *ngIf="isUserLoggedIn">
+        <h4>Account</h4>
         <ul>
-            <li><a routerLink="dashboard">Courses</a></li>
-            <li><a routerLink="account/settings">My Account</a></li>
-            <li><a href="purchases">My Purchases</a></li>
-            <li><a routerLink="admin">Admin Dashboard</a></li>
-        </ul>        
-    </ul>
+            <ul>
+                <li><a routerLink="dashboard">Courses</a></li>
+                <li><a routerLink="account/settings">My Account</a></li>
+                <li><a href="purchases">My Purchases</a></li>
+                <li *ngIf="userHasAdmin"><a routerLink="admin">Admin Dashboard</a></li>
+            </ul>
+        </ul>
+    </div>
 </footer>

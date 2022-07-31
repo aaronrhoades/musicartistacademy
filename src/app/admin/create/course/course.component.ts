@@ -56,7 +56,7 @@ export class CreateCourseComponent implements OnInit {
             course.modules.forEach((x, i) => {
               this.modules.push(this.fb.group({
                 ...x,
-                lessonIds: this.fb.array(x?.lessonIds as Array<Lesson>)
+                lessonIds: this.fb.array(x?.lessonIds as Array<String>)
               }))
             });
           }

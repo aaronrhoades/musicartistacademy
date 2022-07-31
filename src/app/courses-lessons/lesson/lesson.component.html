@@ -1,5 +1,21 @@
 <div class="maa-container" *ngIf="lesson$ | async let lesson">
-    <img [src]="lesson.featureImageUrl" alt="">
+    <img [src]="lesson.featureImageUrl" alt="" class="feature-image">
     <h1>{{lesson.title}}</h1>
     <p>{{lesson.description}}</p>
+
+    <a class="btn btn-primary"
+        [routerLink]="!isLastLesson ? ['/course/', this.course._id, 'lesson', nextLessonId] : ['/course/', this.course._id, 'complete']">
+        {{isLastLesson? 'Complete': 'Next Lesson'}}
+    </a>
+
+    <div *ngFor="let module of course.modules">
+        <h3>{{module?.title}}</h3>
+        <ul *ngIf="module?.lessonIds">
+            <li *ngFor="let lessonId of module?.lessonIds">
+                <a [routerLink]="['/course/', this.course._id, 'lesson', lessonId]">
+                    Lesson {{lessonId}}
+                </a>
+            </li>
+        </ul>
+    </div>
 </div>

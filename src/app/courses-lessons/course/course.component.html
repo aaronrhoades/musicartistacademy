@@ -9,9 +9,14 @@
         </video>
     </div>
     <div [innerHTML]="course.body"></div>
-    <!-- <ng-template *ngFor="let id of course.lessonIds">
-        <div class="card">
-            
-        </div>
-    </ng-template> -->
+    <div *ngFor="let module of course.modules">
+        <h3>{{module?.title}}</h3>
+        <ul *ngIf="module?.lessonIds">
+            <li *ngFor="let lessonId of module?.lessonIds">
+                <a [routerLink]="['lesson/', lessonId]">
+                    Lesson {{lessonId}}
+                </a>
+            </li>
+        </ul>
+    </div>
 </div>

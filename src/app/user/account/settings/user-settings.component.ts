@@ -34,8 +34,8 @@ export class UserSettingsComponent implements OnInit, OnChanges {
       this.form.get('subscriptionFreq')?.setValue(this.accountInfo?.subscriptionFreq);
     }
   }
-  save(){
-    if(this.accountInfo){
+  save() {
+    if(this.accountInfo) {
       this.accountInfo.subscriptions = {
         personalSummary: this.subscriptions.get('personalSummary')?.value,
         webApp: this.subscriptions.get('webApp')?.value,
