@@ -26,8 +26,8 @@ router.route('/account-info/:id')
 
 router.route('/:id')
   .get(userController.getOne)
-  .put(userController.put)
-  .delete(userController.delete)
+  .put(auth.decodeToken, auth.authorizeSystemAdminOrSameUser, userController.put)
+  .delete(auth.decodeToken, auth.authorizeSystemAdminOrSameUser, userController.delete)
 
 
 module.exports = router;
