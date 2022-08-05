@@ -12,6 +12,9 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
   
+  /* getFullCurrentUser()
+   * Validate token and retrieve full user including account info
+   */
   getFullCurrentUser(): Observable<User> {
     return this.http.get(environment.api + '/users/user-from-token').pipe(
       mergeMap(resultA => {
@@ -28,7 +31,7 @@ export class UserService {
   getAccountInfo(user: User) {
     return this.http.get(environment.api + '/users/account-info/' + user._id);
   }
-  getStripeInfo(){
+  getStripeInfo() {
 
   }
   updateUser(user: User) {
