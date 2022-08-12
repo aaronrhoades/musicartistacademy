@@ -103,7 +103,7 @@ exports.delete = (req, res, next) => {
 };
 
 /*********************************
-            BILLING
+            Account Info
 *********************************/
 
 exports.getOneAccountInfo = (req, res, next) => {
