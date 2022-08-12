@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt');
-const stripeAuth = require('../../auth/auth-stripe');
 
 var AccountInfoSchema = new Schema({
   userId: Schema.Types.ObjectId,
@@ -29,13 +28,7 @@ var AccountInfoSchema = new Schema({
     isOwned: Boolean,
     lessonBookmark: Schema.Types.ObjectId,
     isComplete: Boolean
-  }],
-  stripeCustomer: {
-    type: {
-    id: String,
-    delinquent: Boolean,
-    }, required: false
-  }
+  }]
 });
 
 var UserSchema = new Schema({
@@ -97,13 +90,6 @@ UserSchema.methods = {
     }
   }
 };
-
-AccountInfoSchema.methods = {
-  verifyStripe: function(stripeId) {
-    var cust = stripeAuth.getCustomer(stripeId);
-    return cust.delinquent;
-  }
-}
 
 module.exports.User = mongoose.model('User', UserSchema);
 module.exports.AccountInfo = mongoose.model('AccountInfo', AccountInfoSchema);
