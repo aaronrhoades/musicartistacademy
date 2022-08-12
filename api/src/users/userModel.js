@@ -23,7 +23,13 @@ var AccountInfoSchema = new Schema({
     type: String,
     enum: ['monthly','weekly','daily'],
     default:'daily'
-  }, 
+  },
+  courses: [{
+    _id: Schema.Types.ObjectId,
+    isOwned: Boolean,
+    lessonBookmark: Schema.Types.ObjectId,
+    isComplete: Boolean
+  }],
   stripeCustomer: {
     type: {
     id: String,
