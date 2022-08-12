@@ -2,7 +2,6 @@ const { User, AccountInfo } = require('./userModel');
 var _ = require('lodash');
 var signToken = require('../../auth/auth').signToken;
 const config = require('../../config/config.json');
-const stripeAuth = require('../../auth/auth-stripe');
 
 exports.paramsId = (req, res, next, id) => {
   User.findById(id)
