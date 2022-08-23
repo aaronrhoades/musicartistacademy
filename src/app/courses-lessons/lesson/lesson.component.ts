@@ -16,8 +16,10 @@ export class LessonComponent implements OnInit, OnChanges {
   public course: Course = new Course;
   public isLastLesson: boolean = false;
 
-  constructor(private courseLessonService: CourseLessonService, private route: ActivatedRoute, private router: Router) {
-   
+  constructor(
+    private courseLessonService: CourseLessonService,
+    private route: ActivatedRoute,
+    private router: Router) {
   }
 
   ngOnInit(): void {
@@ -33,8 +35,8 @@ export class LessonComponent implements OnInit, OnChanges {
     this.loadLesson();
   }
   loadLesson() {
-    const lessonId = this.route.snapshot.paramMap.get('lessonId');
-    const courseId = this.route.snapshot.paramMap.get('courseId');
+    const lessonId: string | null = this.route.snapshot.paramMap.get('lessonId');
+    const courseId: string | null = this.route.snapshot.paramMap.get('courseId');
     if (lessonId)
       this.lesson$ = this.courseLessonService.lessonById$(lessonId);
     if(courseId)
@@ -42,21 +44,22 @@ export class LessonComponent implements OnInit, OnChanges {
         tap(x=> {this.course = x})
       );
 
-    let useNext = false;
+    let useNext: boolean = false;
     this.course$.subscribe({
       next: res => {
-        res.modules.forEach(x => {
-          x?.lessonIds.forEach(y => {
+        res.modules.forEach(module => {
+          module?.lessonIds.forEach(lessId => {
             if(useNext) {
-              this.nextLessonId = y;
+              this.nextLessonId = lessId;
               return;
             }
-            if(y === lessonId) {
+            if(lessId === lessonId) {
               useNext = true;
             }
           })
         })
-        if (!useNext)
+
+        if (!useNext || lessonId === this.nextLessonId || !this.nextLessonId)
           this.isLastLesson = true;
       }
     });

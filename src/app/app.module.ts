@@ -25,6 +25,7 @@ import { ToastModule } from './shared/toast/toast.module';
 import { UserAccountComponent } from './user/account/user-account.component';
 import { UserSettingsComponent } from './user/account/settings/user-settings.component';
 import { UserBillingComponent } from './user/account/billing/user-billing.component';
+import { CourseCompleteComponent } from './courses-lessons/course-complete/course-complete.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { UserBillingComponent } from './user/account/billing/user-billing.compon
     UnauthorizedComponent,
     UserAccountComponent,
     UserSettingsComponent,
-    UserBillingComponent
+    UserBillingComponent,
+    CourseCompleteComponent
   ],
   imports: [
     BrowserModule,
