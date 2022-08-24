@@ -162,7 +162,7 @@ exports.checkIfUserCourseInfoExists = (req, res, next) => {
   UserCourseInfo.findOne({userId: userId, courseId: courseId}).then(ucInfo => {
     console.log(ucInfo);
     if(ucInfo) {
-      next(new Error('User / course combination already exists'));
+      res.status(409).send('User / course combination already exists');
     } else {
       next();
     }
