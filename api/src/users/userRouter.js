@@ -7,6 +7,8 @@ var userController = require('./userController');
 
 // lock down the right routes :)
 router.param('id', userController.paramsId);
+router.param('userId', userController.paramsId);
+router.param('courseId', userController.courseId);
 
 router.route('/')
   .get(auth.decodeToken, userController.get)
@@ -24,10 +26,17 @@ router.route('/account-info/:id')
   .put(auth.decodeToken, userController.putAccountInfo)
   // .delete(userController.delete)
 
+router.route('/:userId/course-info')
+  .get(auth.decodeToken, auth.authorizeSystemAdminOrSameUser, userController.getUserCourseInfoByUserId)
+
+router.route('/:userId/course-info/:courseId')
+  .get(auth.decodeToken, auth.authorizeSystemAdminOrSameUser, userController.getOneUserCourseInfoByIds)
+  // .put(auth.decodeToken, auth.authorizeSystemAdminOrSameUser, userController.putBookmark)
+  .post(auth.decodeToken, auth.authorizeSystemAdminOrSameUser, userController.checkIfUserCourseInfoExists, userController.createUserCourseInfo)
+
 router.route('/:id')
   .get(userController.getOne)
   .put(auth.decodeToken, auth.authorizeSystemAdminOrSameUser, userController.put)
   .delete(auth.decodeToken, auth.authorizeSystemAdminOrSameUser, userController.delete)
-
 
 module.exports = router;

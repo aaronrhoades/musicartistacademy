@@ -1,4 +1,6 @@
-const { User, AccountInfo } = require('./userModel');
+const { User, AccountInfo, UserCourseInfo } = require('./userModel');
+var Course = require('../courses/courseModel');
+var mongoose = require('mongoose');
 var _ = require('lodash');
 var signToken = require('../../auth/auth').signToken;
 const config = require('../../config/config.json');
@@ -13,6 +15,20 @@ exports.paramsId = (req, res, next, id) => {
         next();
       }
     }, (err) => {
+      next(err);
+    });
+};
+
+exports.courseId = (req, res, next, courseId) => {
+  Course.findById(courseId)
+    .then(function(course) {
+      if (!course) {
+        next(new Error('No course with that id'));
+      } else {
+        req.course = course;
+        next();
+      }
+    }, function(err) {
       next(err);
     });
 };
@@ -133,3 +149,59 @@ exports.putAccountInfo = (req, res, next) => {
     res.json(accInfo)
   })
 };
+
+/*********************************
+            Bookmarks
+*********************************/
+
+exports.checkIfUserCourseInfoExists = (req, res, next) => {
+  var userId = req.params.userId;
+  var courseId = req.params.courseId;
+  console.log(courseId);
+
+  UserCourseInfo.findOne({userId: userId, courseId: courseId}).then(ucInfo => {
+    console.log(ucInfo);
+    if(ucInfo) {
+      next(new Error('User / course combination already exists'));
+    } else {
+      next();
+    }
+  })
+}
+
+exports.createUserCourseInfo = function(req, res, next) {
+  var newUserCourseInfo = new UserCourseInfo(req.body);
+  let courseId = req.params.courseId;
+  let userId = req.user._id;
+  let bookmark = newUserCourseInfo.bookmark;
+  
+  if(bookmark) {  
+    let lessonId = bookmark.lessonId;
+    bookmark.lessonId = new mongoose.Types.ObjectId(lessonId);
+  };
+  newUserCourseInfo.userId = new mongoose.Types.ObjectId(userId);
+  newUserCourseInfo.courseId = new mongoose.Types.ObjectId(courseId)
+
+  newUserCourseInfo.save((err, userCourseInfo) => {
+    if(err) {next(err);}
+
+    res.json(userCourseInfo);
+  });
+};
+
+exports.getUserCourseInfoByUserId = (req, res, next) => {
+  var user = req.user;
+
+  UserCourseInfo.find({userId: user._id }).then(userCourseInfo => {
+    res.json(userCourseInfo);
+  });
+}
+
+exports.getOneUserCourseInfoByIds = (req, res, next) => {
+  var userId = req.params.userId;
+  var courseId = req.params.courseId;
+
+  UserCourseInfo.findOne({userId: userId, courseId: courseId }).then(userCourseInfo => {
+    res.json(userCourseInfo);
+  });
+}

@@ -2,6 +2,25 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt');
 
+
+var UserCourseInfoSchema = new Schema({
+  userId: Schema.Types.ObjectId,
+  courseId: Schema.Types.ObjectId,
+  bookmark: {
+    lessonId: Schema.Types.ObjectId,
+    date: Date,
+    required: false
+  },
+  isOwned: {
+    type: Boolean,
+    default: false
+  },
+  isComplete: {
+    type: Boolean,
+    default: false
+  }
+})
+
 var AccountInfoSchema = new Schema({
   userId: Schema.Types.ObjectId,
   subscriptions: {
@@ -22,13 +41,7 @@ var AccountInfoSchema = new Schema({
     type: String,
     enum: ['monthly','weekly','daily'],
     default:'daily'
-  },
-  courses: [{
-    _id: Schema.Types.ObjectId,
-    isOwned: Boolean,
-    lessonBookmark: Schema.Types.ObjectId,
-    isComplete: Boolean
-  }]
+  }
 });
 
 var UserSchema = new Schema({
@@ -93,3 +106,4 @@ UserSchema.methods = {
 
 module.exports.User = mongoose.model('User', UserSchema);
 module.exports.AccountInfo = mongoose.model('AccountInfo', AccountInfoSchema);
+module.exports.UserCourseInfo = mongoose.model('UserCourseInfo', UserCourseInfoSchema);
