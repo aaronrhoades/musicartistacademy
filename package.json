@@ -1,5 +1,5 @@
 {
-  "name": "maa-public",
+  "name": "musicartistacademy",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "windowsDebug": "cd api & @powershell -Command $env:DEBUG='app,app:*';nodemon api/app.js"
+    "windowsDebug": "cd api & @powershell -Command $env:DEBUG='app,app:*';nodemon api/app.js",
+    "postinstall": "cd api && npm install"
   },
   "private": true,
   "dependencies": {

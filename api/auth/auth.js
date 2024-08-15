@@ -4,8 +4,8 @@ const config = require('../config/config.json');
 const { User } = require('../src/users/userModel');
 var fs = require("fs");
 
-const RSA_PRIVATE_KEY = fs.readFileSync('auth/keys/jwtRS256.key');
-const RSA_PUBLIC_KEY = fs.readFileSync('auth/keys/jwtRS256.key.pub');
+const RSA_PRIVATE_KEY = fs.readFileSync('config/keys/jwtRS256.key');
+const RSA_PUBLIC_KEY = fs.readFileSync('config/keys/jwtRS256.key.pub');
 const checkToken = expressJwt.expressjwt(
   {
     secret: RSA_PUBLIC_KEY,

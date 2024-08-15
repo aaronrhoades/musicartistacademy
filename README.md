@@ -31,6 +31,9 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 This is an education portal for students to log in and view courses. The website will be hosted on [www.musicartistacademy.com](https://www.musicartistacademy.com).
 
 ## Development Setup
+Setup Instructions. The goal is to run `npm start` from home directory using nodemon to run both FE and BE at once. But first:
 
-- For development generate RSA key here: [Git Gist - Generate RSA Key](https://gist.github.com/ygotthilf/baa58da5c3dd1f69fae9) and place in `api/auth/keys`.
-- Edit `api/config/config-example.json` and rename to `config.json`.
+- From root directory and run `npm install`. This will take care of api `node_modules` as well.
+- For JWT generate RSA key here: [Git Gist - Generate RSA Key](https://gist.github.com/ygotthilf/baa58da5c3dd1f69fae9). Place keys in `api/config/keys`
+- Edit a copy of `api/config/config-example.json` as `config.json`
+- Now run `npm start` from app root directory

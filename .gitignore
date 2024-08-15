@@ -47,7 +47,8 @@ testem.log
 Thumbs.db
 
 # Configuration
-/api/config/*
-!/api/config/config-example.json
-/api/auth/keys/*
+/api/config/config.json
+/api/config/keys/*.key.pub
+/api/config/keys/*.key
+
 /api/resources/*
