@@ -33,7 +33,9 @@ This is an education portal for students to log in and view courses. The website
 ## Development Setup
 Setup Instructions. The goal is to run `npm start` from home directory using nodemon to run both FE and BE at once. But first:
 
-- From root directory and run `npm install`. This will take care of api `node_modules` as well.
-- For JWT generate RSA key here: [Git Gist - Generate RSA Key](https://gist.github.com/ygotthilf/baa58da5c3dd1f69fae9). Place keys in `api/config/keys`
+- From root directory, run `npm install`. This will generate node_modules at both the root level and `/api/node_modules`
+- For JWT generate RSA key here: [Git Gist - Generate RSA Key](https://gist.github.com/ygotthilf/baa58da5c3dd1f69fae9) (or follow [these instructions](https://docs.mia-platform.eu/docs/runtime_suite/client-credentials/jwt_keys)).
+    - Place generated keys in `api/config/keys`.
+    - Files should be named `jwtRS256.key` and `jwtRS256.key.pub`
 - Edit a copy of `api/config/config-example.json` as `config.json`
 - Now run `npm start` from app root directory
