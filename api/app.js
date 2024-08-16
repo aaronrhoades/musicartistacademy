@@ -6,7 +6,7 @@ const config = require('./config/config.json');
 const port = config.server.port;
 const userRouter = require('./src/users/userRouter');
 const courseRouter = require('./src/courses/courseRouter');
-const lessonRouter = require('./src/courses/lessons/lessonRouter');
+const lessonRouter = require('./src/lessons/lessonRouter');
 const auth = require('./auth/auth');
 
 require('mongoose').connect(config.db.url, {dbName: config.db.name});

@@ -1,7 +1,7 @@
 var router = require('express').Router();
 //var logger = require('../../util/logger');
 var lessonController = require('./lessonController');
-var auth = require('../../../auth/auth');
+var auth = require('../../auth/auth');
 
 
 // lock down the right routes :)
