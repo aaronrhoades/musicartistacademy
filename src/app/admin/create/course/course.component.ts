@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CourseLessonService } from 'src/app/courses-lessons/course-lesson.service';
 import { AuthService } from 'src/app/user/auth.service';
@@ -18,7 +18,7 @@ export class CreateCourseComponent implements OnInit {
   errors: string[] = [];
   declare myLessons$: Observable<Lesson[]>;
 
-  form: FormGroup = this.fb.group({
+  form: UntypedFormGroup = this.fb.group({
     _id: this.fb.control(''),
     title: this.fb.control('',[Validators.required]),
     featureImageUrl: this.fb.control(''),
@@ -28,13 +28,13 @@ export class CreateCourseComponent implements OnInit {
     modules: this.fb.array([])
   });
 
-  get _id() { return this.form.get('_id') as FormControl }
-  get title() { return this.form.get('title') as FormControl }
-  get modules() { return this.form.get('modules') as FormArray }
-  getLessonIds(index: number) : FormArray {return (this.modules.controls[index] as FormGroup)?.get('lessonIds') as FormArray}
+  get _id() { return this.form.get('_id') as FormControl<string> }
+  get title() { return this.form.get('title') as FormControl<string> }
+  get modules() { return this.form.get('modules') as UntypedFormArray }
+  getLessonIds(index: number) : UntypedFormArray {return (this.modules.controls[index] as UntypedFormGroup)?.get('lessonIds') as UntypedFormArray}
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private courseLessonService: CourseLessonService,
     private adminService: AdminService,
     private authService: AuthService,
@@ -80,12 +80,12 @@ export class CreateCourseComponent implements OnInit {
   }
 
   addLesson(index: number) {
-    let lessons = this.modules.get(String(index))?.get('lessonIds') as FormArray;
+    let lessons = this.modules.get(String(index))?.get('lessonIds') as UntypedFormArray;
     lessons.push(this.fb.control(''));
   }
 
   removeLesson(index: number, ind: number) {
-    let lessons = this.modules.get(String(index))?.get('lessonIds') as FormArray;
+    let lessons = this.modules.get(String(index))?.get('lessonIds') as UntypedFormArray;
     lessons.removeAt(ind);
   }
 

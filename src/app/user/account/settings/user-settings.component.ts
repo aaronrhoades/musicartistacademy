@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { AccountInfo } from 'src/app/shared/models/user/user';
 import { ToastService } from 'src/app/shared/toast/toast.service';
 import { UserService } from '../../user.service';
@@ -12,16 +12,16 @@ import { UserService } from '../../user.service';
 export class UserSettingsComponent implements OnInit, OnChanges {
   @Input() accountInfo: AccountInfo | null = null;
 
-  subscriptions: FormGroup = this.fb.group({
+  subscriptions: UntypedFormGroup = this.fb.group({
     personalSummary: [''],
     webApp: [''],
     community: ['']
   });
-  form: FormGroup = this.fb.group({
+  form: UntypedFormGroup = this.fb.group({
     subscriptions: this.subscriptions,
     subscriptionFreq: ['daily', Validators.required]
   });
-  constructor(private fb: FormBuilder, private userService: UserService, private toastService: ToastService) { }
+  constructor(private fb: UntypedFormBuilder, private userService: UserService, private toastService: ToastService) { }
 
   ngOnInit(): void {
   }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CourseLessonService } from 'src/app/courses-lessons/course-lesson.service';
 import { Lesson } from 'src/app/shared/models/course/course';
@@ -16,7 +16,7 @@ export class CreateLessonComponent implements OnInit {
   isNewLesson: boolean = true;
   errors: string[] = [];
 
-  form: FormGroup = this.fb.group({
+  form: UntypedFormGroup = this.fb.group({
     _id: this.fb.control(''),
     title: this.fb.control('',[Validators.required]),
     featureImageUrl: this.fb.control(''),
@@ -25,11 +25,11 @@ export class CreateLessonComponent implements OnInit {
     modules: this.fb.array([])
   });
 
-  get _id() { return this.form.get('_id') as FormControl }
-  get title() { return this.form.get('title') as FormControl}
+  get _id() { return this.form.get('_id') as FormControl<string> }
+  get title() { return this.form.get('title') as FormControl<string>}
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private courseLessonService: CourseLessonService,
     private adminService: AdminService,
     private authService: AuthService,

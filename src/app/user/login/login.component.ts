@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Login } from 'src/app/shared/models/user/user';
 import { AuthService } from '../auth.service';
@@ -15,18 +15,18 @@ export class LoginComponent implements OnInit, OnDestroy {
   errors: string[] = [];
   public changedSinceLastSubmit: boolean = false;
 
-  public loginForm: FormGroup = this.fb.group({
-    email: new FormControl('',
+  public loginForm: UntypedFormGroup = this.fb.group({
+    email: new FormControl<string>('',
     {
       validators:[Validators.required, Validators.email]
     }),
-    password: new FormControl('',[Validators.required])
+    password: new FormControl<string>('',[Validators.required])
   });
 
   get email() { return this.loginForm.get('email'); }
   get password() { return this.loginForm.get('password'); }
 
-  constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) { }
+  constructor(private authService: AuthService, private router: Router, private fb: UntypedFormBuilder) { }
 
   ngOnInit(): void {
     this.errors = this.authService.errors.getValue();

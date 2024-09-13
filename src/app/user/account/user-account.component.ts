@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute, NavigationEnd, Router, RouterEvent } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from 'src/app/shared/models/user/user';
@@ -17,13 +17,13 @@ export class UserAccountComponent implements OnInit {
   public currentStep$: Observable<UserAcountPage> = this.currentStepBs.asObservable();
   userInfo: User = new User();
 
-  public userForm: FormGroup = this.fb.group({
+  public userForm: UntypedFormGroup = this.fb.group({
     settings: null,
     billing: null
   });
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private userService: UserService,

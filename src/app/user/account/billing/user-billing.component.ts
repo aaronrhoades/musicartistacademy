@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, FormGroup } from '@angular/forms';
 // import { EventEmitter } from 'stream';
 
 @Component({
@@ -10,7 +10,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class UserBillingComponent implements OnInit {
   // @Output() subformInitialized: EventEmitter = new EventEmitter();
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: UntypedFormBuilder) { }
 
   ngOnInit(): void {
     

@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { timer } from 'rxjs';
 import { User, StateAbbreviations } from 'src/app/shared/models/user/user';
@@ -17,27 +17,27 @@ export class RegisterComponent implements OnInit, OnChanges {
   @Input() newUser: boolean = true;
   changePassword: boolean = false;
   passwordMinLength: number = 6;
-  passwordFormControl: FormControl = new FormControl('', [Validators.required, Validators.minLength(this.passwordMinLength)]);
+  passwordFormControl: FormControl = new FormControl<string>('', [Validators.required, Validators.minLength(this.passwordMinLength)]);
   errors: string[] = [];
   public changedSinceLastSubmit: boolean = true; //helps prevent multiple invalid calls to server
   public readonly states: string[] = StateAbbreviations;
   public registration: User = new User();
-  public registerForm: FormGroup = this.fb.group({
-    email: new FormControl(
+  public registerForm: UntypedFormGroup = this.fb.group({
+    email: new FormControl<string>(
       '',
       {
         validators: [Validators.required, Validators.email]
         //,updateOn: 'blur'
       }),
-    firstName: new FormControl('', Validators.required),
-    lastName: new FormControl(),
-    phone: new FormControl(),
-    mailingAddress: new FormGroup({
-      addressLine1: new FormControl(),
-      addressLine2: new FormControl(),
-      city: new FormControl(),
-      state: new FormControl(),
-      zip: new FormControl()
+    firstName: new FormControl<string>('', Validators.required),
+    lastName: new FormControl<string>(''),
+    phone: new FormControl<string>(''),
+    mailingAddress: new UntypedFormGroup({
+      addressLine1: new FormControl<string>(''),
+      addressLine2: new FormControl<string>(''),
+      city: new FormControl<string>(''),
+      state: new FormControl<string>(''),
+      zip: new FormControl<string>('')
     }),
   });
 
@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit, OnChanges {
     private authService: AuthService,
     private userService: UserService,
     private router: Router,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private cdr: ChangeDetectorRef,
     private toastService: ToastService
     ) { }
